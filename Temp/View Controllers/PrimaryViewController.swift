@@ -24,6 +24,9 @@ class PrimaryViewController: UIViewController {
                 
         tempCompare()
         
+        TTTAttributedLabel *tempFeelingLabel = [[TTTAttributedLabel alloc] initWithFrame:CGRectZero];
+        tempFeelingLabel.lineSpacing = 3
+        
     }
 
     override func didReceiveMemoryWarning() {
