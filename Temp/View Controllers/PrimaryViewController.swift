@@ -105,9 +105,9 @@ class PrimaryViewController: UIViewController, CLLocationManagerDelegate{
             var placeMark: CLPlacemark!
             placeMark = placemarks?[0]
             
-            let city = placeMark.addressDictionary!["City"] as! NSString
+            let city = placeMark.addressDictionary!["City"] as? NSString
             
-            print(city)
+            print(city as Any)
             
         })
         
