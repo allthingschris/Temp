@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import CoreLocation
 
-class PrimaryViewController: UIViewController {
+class PrimaryViewController: UIViewController, CLLocationManagerDelegate{
     @IBOutlet weak var tempFeelingLabel: UILabel!
     
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -21,11 +22,12 @@ class PrimaryViewController: UIViewController {
         
         appDelegate.locationManager.requestAlwaysAuthorization()
         appDelegate.locationManager.startUpdatingLocation()
-                
+        appDelegate.locationManager.delegate = self
+
         tempCompare()
         
-        TTTAttributedLabel *tempFeelingLabel = [[TTTAttributedLabel alloc] initWithFrame:CGRectZero];
-        tempFeelingLabel.lineSpacing = 3
+//        TTTAttributedLabel *tempFeelingLabel = [[TTTAttributedLabel alloc] initWithFrame:CGRectZero];
+//        tempFeelingLabel.lineSpacing = 3
         
     }
 
@@ -86,10 +88,12 @@ class PrimaryViewController: UIViewController {
         
     }
     
-    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
-        var location = locations[0] as CLLocation
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let location = locations[0]
         
         print(location)
-   }
+        
+        appDelegate.locationManager.stopUpdatingLocation()
+    }
     
 }
