@@ -32,8 +32,6 @@ class PrimaryViewController: UIViewController, CLLocationManagerDelegate{
         tempFeelingLabel.text = tempFeelingLabel.text
         
         tempCompare()
-
-
         
     }
 
@@ -105,9 +103,11 @@ class PrimaryViewController: UIViewController, CLLocationManagerDelegate{
             var placeMark: CLPlacemark!
             placeMark = placemarks?[0]
             
-            let city = placeMark.addressDictionary!["City"] as? NSString
+            let city = placeMark.addressDictionary!["City"] as! NSString
             
-            print(city as Any)
+            print("You are located in", city)
+            
+            self.selectedLocation.text = "\(city)"
             
         })
         
