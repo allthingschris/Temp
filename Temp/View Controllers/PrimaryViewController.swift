@@ -49,42 +49,35 @@ class PrimaryViewController: UIViewController {
         let temperatureDifference = todayTemp - yesterdayTemp
         let temperatureDelta = abs(temperatureDifference)
         
-        let blueColor = UIColor.init(red: 0, green: 113/255, blue: 187/255, alpha: 1)
-        let cyanColor = UIColor.init(red: 37/255, green: 171/255, blue: 225/255, alpha: 1)
-        let greenColor = UIColor.init(red: 51/255, green: 181/255, blue: 75/255, alpha: 1)
-        let orangeColor = UIColor.init(red: 242/255, green: 91/255, blue: 38/255, alpha: 1)
-        let redColor = UIColor.init(red: 194/255, green: 41/255, blue: 46/255, alpha: 1)
-        
-        
         if temperatureDifference < -1 && temperatureDelta >= 10 {
         
             print("Blue")
             tempFeelingLabel.text = "a lot colder"
-            tempFeelingLabel.textColor = blueColor
+            tempFeelingLabel.textColor = appDelegate.blueColor
             
         } else if temperatureDifference < -1 && temperatureDelta < 10 {
             
             print("Light Blue")
             tempFeelingLabel.text = "a little cooler"
-            tempFeelingLabel.textColor = cyanColor
+            tempFeelingLabel.textColor = appDelegate.cyanColor
 
         } else if temperatureDifference > 1 && temperatureDelta < 10 {
             
             print("Orange")
             tempFeelingLabel.text = "a little warmer"
-            tempFeelingLabel.textColor = orangeColor
+            tempFeelingLabel.textColor = appDelegate.orangeColor
             
         } else if temperatureDifference > 1 && temperatureDelta >= 10 {
             
             print("Red")
             tempFeelingLabel.text = "a lot hotter"
-            tempFeelingLabel.textColor = redColor
+            tempFeelingLabel.textColor = appDelegate.redColor
 
         } else {
             
             print("Green")
             tempFeelingLabel.text = "no different"
-            tempFeelingLabel.textColor = greenColor
+            tempFeelingLabel.textColor = appDelegate.greenColor
             
         }
         
@@ -94,6 +87,6 @@ class PrimaryViewController: UIViewController {
         var location = locations[0] as CLLocation
         
         print(location)
-    }
+   }
     
 }
