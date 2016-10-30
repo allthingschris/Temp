@@ -9,9 +9,12 @@
 import UIKit
 import CoreLocation
 import TTTAttributedLabel
+import MapKit
 
 class PrimaryViewController: UIViewController, CLLocationManagerDelegate{
+
     @IBOutlet weak var tempFeelingLabel: TTTAttributedLabel!
+    @IBOutlet weak var selectedLocation: UILabel!
     
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
 
@@ -29,6 +32,7 @@ class PrimaryViewController: UIViewController, CLLocationManagerDelegate{
         tempFeelingLabel.text = tempFeelingLabel.text
         
         tempCompare()
+
 
         
     }
@@ -95,8 +99,25 @@ class PrimaryViewController: UIViewController, CLLocationManagerDelegate{
         let location = locations[0]
         
         print(location)
+
+        CLGeocoder().reverseGeocodeLocation(location, completionHandler: { (placemarks, error) -> Void in
+         
+            var placeMark: CLPlacemark!
+            placeMark = placemarks?[0]
+            
+            let city = placeMark.addressDictionary!["City"] as! NSString
+            
+            print(city)
+            
+        })
         
         appDelegate.locationManager.stopUpdatingLocation()
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+
+        print("We were unable to get your location.")
+        
     }
     
 }

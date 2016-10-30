@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		835C5E1D1DC66F650079790A /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83A8BB941DC6390D003AA884 /* MapKit.framework */; };
 		83A8BB5E1DC5807D003AA884 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A8BB5D1DC5807D003AA884 /* AppDelegate.swift */; };
 		83A8BB601DC5807D003AA884 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A8BB5F1DC5807D003AA884 /* ViewController.swift */; };
 		83A8BB631DC5807D003AA884 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83A8BB611DC5807D003AA884 /* Main.storyboard */; };
@@ -68,6 +69,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				83A8BB971DC639D6003AA884 /* CoreLocation.framework in Frameworks */,
+				835C5E1D1DC66F650079790A /* MapKit.framework in Frameworks */,
 				EB33CCE19804D0CFB47C8E52 /* Pods_Temp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -256,7 +258,7 @@
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Maps.iOS = {
-								enabled = 0;
+								enabled = 1;
 							};
 						};
 					};
