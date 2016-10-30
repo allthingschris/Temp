@@ -24,11 +24,12 @@ class PrimaryViewController: UIViewController, CLLocationManagerDelegate{
         appDelegate.locationManager.requestAlwaysAuthorization()
         appDelegate.locationManager.startUpdatingLocation()
         appDelegate.locationManager.delegate = self
-
+        
+        tempFeelingLabel.lineHeightMultiple = 0.6
+        tempFeelingLabel.text = tempFeelingLabel.text
+        
         tempCompare()
-        
-        tempFeelingLabel.lineHeightMultiple = 2.0
-        
+
         
     }
 
@@ -51,39 +52,40 @@ class PrimaryViewController: UIViewController, CLLocationManagerDelegate{
     func tempCompare() {
 
         let yesterdayTemp = 90
-        let todayTemp = 91
+        let todayTemp = 96
         let temperatureDifference = todayTemp - yesterdayTemp
         let temperatureDelta = abs(temperatureDifference)
+        
         
         if temperatureDifference < -1 && temperatureDelta >= 10 {
         
             print("Blue")
-            tempFeelingLabel.text = "a lot colder"
             tempFeelingLabel.textColor = appDelegate.blueColor
+            tempFeelingLabel.text = "a lot colder"
             
         } else if temperatureDifference < -1 && temperatureDelta < 10 {
             
             print("Light Blue")
-            tempFeelingLabel.text = "a little cooler"
             tempFeelingLabel.textColor = appDelegate.cyanColor
+            tempFeelingLabel.text = "a little cooler"
 
         } else if temperatureDifference > 1 && temperatureDelta < 10 {
             
             print("Orange")
-            tempFeelingLabel.text = "a little warmer"
             tempFeelingLabel.textColor = appDelegate.orangeColor
+            tempFeelingLabel.text = "a little warmer"
             
         } else if temperatureDifference > 1 && temperatureDelta >= 10 {
             
             print("Red")
-            tempFeelingLabel.text = "a lot hotter"
             tempFeelingLabel.textColor = appDelegate.redColor
+            tempFeelingLabel.text = "a lot hotter"
 
         } else {
             
             print("Green")
-            tempFeelingLabel.text = "no different"
             tempFeelingLabel.textColor = appDelegate.greenColor
+            tempFeelingLabel.text = "no different"
             
         }
         
