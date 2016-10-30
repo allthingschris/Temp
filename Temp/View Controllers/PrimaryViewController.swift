@@ -8,9 +8,10 @@
 
 import UIKit
 import CoreLocation
+import TTTAttributedLabel
 
 class PrimaryViewController: UIViewController, CLLocationManagerDelegate{
-    @IBOutlet weak var tempFeelingLabel: UILabel!
+    @IBOutlet weak var tempFeelingLabel: TTTAttributedLabel!
     
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
 
@@ -26,8 +27,8 @@ class PrimaryViewController: UIViewController, CLLocationManagerDelegate{
 
         tempCompare()
         
-//        TTTAttributedLabel *tempFeelingLabel = [[TTTAttributedLabel alloc] initWithFrame:CGRectZero];
-//        tempFeelingLabel.lineSpacing = 3
+        tempFeelingLabel.lineHeightMultiple = 2.0
+        
         
     }
 
