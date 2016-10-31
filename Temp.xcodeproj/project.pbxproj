@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		835C49D51DC694C400EBB2DF /* CabinSketch-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 835C49D21DC694C400EBB2DF /* CabinSketch-Bold.otf */; };
+		835C49D61DC694C400EBB2DF /* CabinSketch-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 835C49D31DC694C400EBB2DF /* CabinSketch-Regular.otf */; };
+		835C49D71DC694C400EBB2DF /* Chalet-ParisNineteenSixty.otf in Resources */ = {isa = PBXBuildFile; fileRef = 835C49D41DC694C400EBB2DF /* Chalet-ParisNineteenSixty.otf */; };
+		835C49D91DC6993000EBB2DF /* Chalet-NewYorkNineteenSeventy.otf in Resources */ = {isa = PBXBuildFile; fileRef = 835C49D81DC6993000EBB2DF /* Chalet-NewYorkNineteenSeventy.otf */; };
 		835C5E1D1DC66F650079790A /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83A8BB941DC6390D003AA884 /* MapKit.framework */; };
 		83A8BB5E1DC5807D003AA884 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A8BB5D1DC5807D003AA884 /* AppDelegate.swift */; };
 		83A8BB601DC5807D003AA884 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A8BB5F1DC5807D003AA884 /* ViewController.swift */; };
@@ -40,6 +44,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		835C49D21DC694C400EBB2DF /* CabinSketch-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CabinSketch-Bold.otf"; sourceTree = "<group>"; };
+		835C49D31DC694C400EBB2DF /* CabinSketch-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CabinSketch-Regular.otf"; sourceTree = "<group>"; };
+		835C49D41DC694C400EBB2DF /* Chalet-ParisNineteenSixty.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Chalet-ParisNineteenSixty.otf"; sourceTree = "<group>"; };
+		835C49D81DC6993000EBB2DF /* Chalet-NewYorkNineteenSeventy.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Chalet-NewYorkNineteenSeventy.otf"; sourceTree = "<group>"; };
 		83A8BB5A1DC5807D003AA884 /* Temp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Temp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		83A8BB5D1DC5807D003AA884 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		83A8BB5F1DC5807D003AA884 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -167,6 +175,10 @@
 		83A8BB8E1DC58880003AA884 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				835C49D21DC694C400EBB2DF /* CabinSketch-Bold.otf */,
+				835C49D81DC6993000EBB2DF /* Chalet-NewYorkNineteenSeventy.otf */,
+				835C49D31DC694C400EBB2DF /* CabinSketch-Regular.otf */,
+				835C49D41DC694C400EBB2DF /* Chalet-ParisNineteenSixty.otf */,
 				83A8BB8F1DC58A09003AA884 /* CabinSketch-Bold.ttf */,
 				83A8BB901DC58A09003AA884 /* CabinSketch-Regular.ttf */,
 			);
@@ -301,11 +313,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				835C49D71DC694C400EBB2DF /* Chalet-ParisNineteenSixty.otf in Resources */,
 				83A8BB681DC5807D003AA884 /* LaunchScreen.storyboard in Resources */,
 				83A8BB911DC58A09003AA884 /* CabinSketch-Bold.ttf in Resources */,
 				83A8BB921DC58A09003AA884 /* CabinSketch-Regular.ttf in Resources */,
 				83A8BB651DC5807D003AA884 /* Assets.xcassets in Resources */,
+				835C49D51DC694C400EBB2DF /* CabinSketch-Bold.otf in Resources */,
 				83A8BB631DC5807D003AA884 /* Main.storyboard in Resources */,
+				835C49D61DC694C400EBB2DF /* CabinSketch-Regular.otf in Resources */,
+				835C49D91DC6993000EBB2DF /* Chalet-NewYorkNineteenSeventy.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

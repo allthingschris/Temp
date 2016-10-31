@@ -30,8 +30,10 @@
 	</array>
 	<key>UIAppFonts</key>
 	<array>
-		<string>CabinSketch-Bold.ttf</string>
-		<string>CabinSketch-Regular.ttf</string>
+		<string>CabinSketch-Bold.otf</string>
+		<string>CabinSketch-Regular.otf</string>
+		<string>Chalet-ParisNineteemSixty.otf</string>
+		<string>Chalet-NewYorkNineteenSeventy.otf</string>
 	</array>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Lorem ipsum #1</string>
