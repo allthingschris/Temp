@@ -143,6 +143,7 @@ class PrimaryViewController: UIViewController, CLLocationManagerDelegate{
         
         let yesterdayTemp = 90
         let todayTemp = todaysForecast["apparentTemperature"] as! Int
+//      let todayTemp = 90
         let temperatureDifference = todayTemp - yesterdayTemp
         let temperatureDelta = abs(temperatureDifference)
         
