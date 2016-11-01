@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		830F21371DC6D19500B058F7 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 830F21361DC6D19500B058F7 /* Settings.bundle */; };
+		830F21391DC8A5F800B058F7 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830F21381DC8A5F800B058F7 /* Common.swift */; };
 		835C49D51DC694C400EBB2DF /* CabinSketch-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 835C49D21DC694C400EBB2DF /* CabinSketch-Bold.otf */; };
 		835C49D61DC694C400EBB2DF /* CabinSketch-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 835C49D31DC694C400EBB2DF /* CabinSketch-Regular.otf */; };
 		835C49D71DC694C400EBB2DF /* Chalet-ParisNineteenSixty.otf in Resources */ = {isa = PBXBuildFile; fileRef = 835C49D41DC694C400EBB2DF /* Chalet-ParisNineteenSixty.otf */; };
@@ -44,6 +46,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		830F21361DC6D19500B058F7 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Settings.bundle; path = Temp/Settings.bundle; sourceTree = "<group>"; };
+		830F21381DC8A5F800B058F7 /* Common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 		835C49D21DC694C400EBB2DF /* CabinSketch-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CabinSketch-Bold.otf"; sourceTree = "<group>"; };
 		835C49D31DC694C400EBB2DF /* CabinSketch-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CabinSketch-Regular.otf"; sourceTree = "<group>"; };
 		835C49D41DC694C400EBB2DF /* Chalet-ParisNineteenSixty.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Chalet-ParisNineteenSixty.otf"; sourceTree = "<group>"; };
@@ -111,6 +115,7 @@
 		83A8BB511DC5807D003AA884 = {
 			isa = PBXGroup;
 			children = (
+				830F21361DC6D19500B058F7 /* Settings.bundle */,
 				83A8BB5C1DC5807D003AA884 /* Temp */,
 				83A8BB711DC5807D003AA884 /* TempTests */,
 				83A8BB7C1DC5807D003AA884 /* TempUITests */,
@@ -136,6 +141,7 @@
 				83A8BB8E1DC58880003AA884 /* Supporting Files */,
 				83A8BB8D1DC58274003AA884 /* View Controllers */,
 				83A8BB5D1DC5807D003AA884 /* AppDelegate.swift */,
+				830F21381DC8A5F800B058F7 /* Common.swift */,
 				83A8BB5F1DC5807D003AA884 /* ViewController.swift */,
 				83A8BB611DC5807D003AA884 /* Main.storyboard */,
 				83A8BB641DC5807D003AA884 /* Assets.xcassets */,
@@ -315,6 +321,7 @@
 			files = (
 				835C49D71DC694C400EBB2DF /* Chalet-ParisNineteenSixty.otf in Resources */,
 				83A8BB681DC5807D003AA884 /* LaunchScreen.storyboard in Resources */,
+				830F21371DC6D19500B058F7 /* Settings.bundle in Resources */,
 				83A8BB911DC58A09003AA884 /* CabinSketch-Bold.ttf in Resources */,
 				83A8BB921DC58A09003AA884 /* CabinSketch-Regular.ttf in Resources */,
 				83A8BB651DC5807D003AA884 /* Assets.xcassets in Resources */,
@@ -394,6 +401,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				830F21391DC8A5F800B058F7 /* Common.swift in Sources */,
 				83A8BB601DC5807D003AA884 /* ViewController.swift in Sources */,
 				83A8BB8C1DC58269003AA884 /* PrimaryViewController.swift in Sources */,
 				83A8BB5E1DC5807D003AA884 /* AppDelegate.swift in Sources */,

@@ -20,6 +20,7 @@ class PrimaryViewController: UIViewController, CLLocationManagerDelegate{
     
     var gradient = CAGradientLayer()
     var forecasts: [NSDictionary]! = []
+    var todaysForecast: [NSDictionary]! = []
     var latitude: Double!
     var longitude: Double!
     
@@ -40,9 +41,13 @@ class PrimaryViewController: UIViewController, CLLocationManagerDelegate{
         tempFeelingLabel.lineHeightMultiple = 0.6
         tempFeelingLabel.text = tempFeelingLabel.text
         
-        getWeather()
-        
-        tempCompare()
+        delay(2){ () -> () in
+            
+            self.getWeather()
+            
+            self.tempCompare()
+            
+        }
         
     }
     
@@ -76,7 +81,6 @@ class PrimaryViewController: UIViewController, CLLocationManagerDelegate{
             var placeMark: CLPlacemark!
             placeMark = placemarks?[0]
             
-            
             if let city = placeMark.locality, let state = placeMark.administrativeArea {
                 self.selectedLocation.text = "\(city), \(state)"
                 print("You are located in", city, state)
@@ -102,9 +106,10 @@ class PrimaryViewController: UIViewController, CLLocationManagerDelegate{
     func getWeather() {
         
         let apiKey = "c8ce828d290027eefc03bf39287d8589"
-        let coordinates = "\(latitude),\(longitude)"
+        let coordinates = "\(latitude!),\(longitude!)"
         
         print(coordinates)
+        print("https://api.darksky.net/forecast/\(apiKey)/\(coordinates)")
         
         let url = URL(string:"https://api.darksky.net/forecast/\(apiKey)/\(coordinates)")
         let request = URLRequest(url: url!)
@@ -119,6 +124,9 @@ class PrimaryViewController: UIViewController, CLLocationManagerDelegate{
                 if let responseDictionary = try! JSONSerialization.jsonObject(with: data, options:[]) as? NSDictionary {
                     print("response: \(responseDictionary)")
                     self.forecasts = responseDictionary.value(forKeyPath: "response.forecasts") as? [NSDictionary]
+                    
+                    self.todaysForecast = responseDictionary["currently"] as! [NSDictionary]
+                    
                 }
             }
         });
@@ -129,10 +137,19 @@ class PrimaryViewController: UIViewController, CLLocationManagerDelegate{
     
     func tempCompare() {
         
+//      return todaysForecast.count
+        
+//      let today = todaysForecast[indexPath.row]
+        
         let yesterdayTemp = 90
-        let todayTemp = 96
+        let todayTemp = todaysForecast["apparentTemperature"] as! Int
         let temperatureDifference = todayTemp - yesterdayTemp
         let temperatureDelta = abs(temperatureDifference)
+        
+        
+        currentTemperatureLabel.text = "\(todayTemp)"
+        
+        
         
         
         if temperatureDifference < -1 && temperatureDelta >= 10 {
