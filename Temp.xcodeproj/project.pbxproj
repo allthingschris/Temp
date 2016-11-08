@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		830F21371DC6D19500B058F7 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 830F21361DC6D19500B058F7 /* Settings.bundle */; };
 		830F21391DC8A5F800B058F7 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830F21381DC8A5F800B058F7 /* Common.swift */; };
 		835C49D51DC694C400EBB2DF /* CabinSketch-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 835C49D21DC694C400EBB2DF /* CabinSketch-Bold.otf */; };
 		835C49D61DC694C400EBB2DF /* CabinSketch-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 835C49D31DC694C400EBB2DF /* CabinSketch-Regular.otf */; };
@@ -25,6 +24,10 @@
 		83A8BB911DC58A09003AA884 /* CabinSketch-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 83A8BB8F1DC58A09003AA884 /* CabinSketch-Bold.ttf */; };
 		83A8BB921DC58A09003AA884 /* CabinSketch-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 83A8BB901DC58A09003AA884 /* CabinSketch-Regular.ttf */; };
 		83A8BB971DC639D6003AA884 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83A8BB961DC639D6003AA884 /* CoreLocation.framework */; };
+		A840D0631DC90DDB0094316C /* SelectATimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A840D0621DC90DDB0094316C /* SelectATimeViewController.swift */; };
+		A840D0651DC90E970094316C /* SelectALocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A840D0641DC90E970094316C /* SelectALocationViewController.swift */; };
+		A849BAB11DC90F5200AFB579 /* DailyDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A849BAB01DC90F5200AFB579 /* DailyDetailViewController.swift */; };
+		A849BAB31DC90F9E00AFB579 /* SelectADateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A849BAB21DC90F9E00AFB579 /* SelectADateViewController.swift */; };
 		EB33CCE19804D0CFB47C8E52 /* Pods_Temp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2030E29390EC2530EADF398 /* Pods_Temp.framework */; };
 /* End PBXBuildFile section */
 
@@ -46,7 +49,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		830F21361DC6D19500B058F7 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Settings.bundle; path = Temp/Settings.bundle; sourceTree = "<group>"; };
 		830F21381DC8A5F800B058F7 /* Common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 		835C49D21DC694C400EBB2DF /* CabinSketch-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CabinSketch-Bold.otf"; sourceTree = "<group>"; };
 		835C49D31DC694C400EBB2DF /* CabinSketch-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CabinSketch-Regular.otf"; sourceTree = "<group>"; };
@@ -72,6 +74,10 @@
 		83A8BB961DC639D6003AA884 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		A5024A0956F95AD5CF71FFEF /* Pods-Temp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Temp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Temp/Pods-Temp.debug.xcconfig"; sourceTree = "<group>"; };
 		A77C64C173B35E27DB7D3C89 /* Pods-Temp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Temp.release.xcconfig"; path = "Pods/Target Support Files/Pods-Temp/Pods-Temp.release.xcconfig"; sourceTree = "<group>"; };
+		A840D0621DC90DDB0094316C /* SelectATimeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SelectATimeViewController.swift; path = "Temp/View Controllers/SelectATimeViewController.swift"; sourceTree = "<group>"; };
+		A840D0641DC90E970094316C /* SelectALocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SelectALocationViewController.swift; path = "Temp/View Controllers/SelectALocationViewController.swift"; sourceTree = "<group>"; };
+		A849BAB01DC90F5200AFB579 /* DailyDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DailyDetailViewController.swift; path = "Temp/View Controllers/DailyDetailViewController.swift"; sourceTree = "<group>"; };
+		A849BAB21DC90F9E00AFB579 /* SelectADateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SelectADateViewController.swift; path = "Temp/View Controllers/SelectADateViewController.swift"; sourceTree = "<group>"; };
 		E2030E29390EC2530EADF398 /* Pods_Temp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Temp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -115,7 +121,6 @@
 		83A8BB511DC5807D003AA884 = {
 			isa = PBXGroup;
 			children = (
-				830F21361DC6D19500B058F7 /* Settings.bundle */,
 				83A8BB5C1DC5807D003AA884 /* Temp */,
 				83A8BB711DC5807D003AA884 /* TempTests */,
 				83A8BB7C1DC5807D003AA884 /* TempUITests */,
@@ -172,6 +177,10 @@
 		83A8BB8D1DC58274003AA884 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				A849BAB21DC90F9E00AFB579 /* SelectADateViewController.swift */,
+				A849BAB01DC90F5200AFB579 /* DailyDetailViewController.swift */,
+				A840D0641DC90E970094316C /* SelectALocationViewController.swift */,
+				A840D0621DC90DDB0094316C /* SelectATimeViewController.swift */,
 				83A8BB8B1DC58269003AA884 /* PrimaryViewController.swift */,
 			);
 			name = "View Controllers";
@@ -321,7 +330,6 @@
 			files = (
 				835C49D71DC694C400EBB2DF /* Chalet-ParisNineteenSixty.otf in Resources */,
 				83A8BB681DC5807D003AA884 /* LaunchScreen.storyboard in Resources */,
-				830F21371DC6D19500B058F7 /* Settings.bundle in Resources */,
 				83A8BB911DC58A09003AA884 /* CabinSketch-Bold.ttf in Resources */,
 				83A8BB921DC58A09003AA884 /* CabinSketch-Regular.ttf in Resources */,
 				83A8BB651DC5807D003AA884 /* Assets.xcassets in Resources */,
@@ -401,8 +409,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A849BAB31DC90F9E00AFB579 /* SelectADateViewController.swift in Sources */,
+				A849BAB11DC90F5200AFB579 /* DailyDetailViewController.swift in Sources */,
 				830F21391DC8A5F800B058F7 /* Common.swift in Sources */,
+				A840D0651DC90E970094316C /* SelectALocationViewController.swift in Sources */,
 				83A8BB601DC5807D003AA884 /* ViewController.swift in Sources */,
+				A840D0631DC90DDB0094316C /* SelectATimeViewController.swift in Sources */,
 				83A8BB8C1DC58269003AA884 /* PrimaryViewController.swift in Sources */,
 				83A8BB5E1DC5807D003AA884 /* AppDelegate.swift in Sources */,
 			);

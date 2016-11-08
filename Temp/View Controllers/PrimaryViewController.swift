@@ -17,10 +17,17 @@ class PrimaryViewController: UIViewController, CLLocationManagerDelegate{
     @IBOutlet weak var selectedLocation: UILabel!
     @IBOutlet weak var primaryMessageView: UIView!
     @IBOutlet weak var currentTemperatureLabel: UILabel!
+    @IBOutlet weak var weatherIcon: UIImageView!
+    @IBOutlet weak var currentDayView: UIView!
+    @IBOutlet weak var yesterdayView: UIView!
+    @IBOutlet weak var dayBeforeYesterdayView: UIView!
+    @IBOutlet weak var tomorrowView: UIView!
+    @IBOutlet weak var dayAfterTomorrowView: UIView!
     
     var gradient = CAGradientLayer()
     var forecasts: [NSDictionary]! = []
-    var todaysForecast: [NSDictionary]! = []
+    var todaysForecast: NSDictionary! = NSDictionary()
+    var todayDaily: NSDictionary! = NSDictionary()
     var latitude: Double!
     var longitude: Double!
     
@@ -38,16 +45,12 @@ class PrimaryViewController: UIViewController, CLLocationManagerDelegate{
         appDelegate.locationManager.startUpdatingLocation()
         appDelegate.locationManager.delegate = self
         
-        tempFeelingLabel.lineHeightMultiple = 0.6
+        tempFeelingLabel.lineHeightMultiple = 0.8
         tempFeelingLabel.text = tempFeelingLabel.text
         
-        delay(2){ () -> () in
-            
-            self.getWeather()
-            
-            self.tempCompare()
-            
-        }
+        selectedLocation.alpha = 0
+        weatherIcon.alpha = 0
+        primaryMessageView.alpha = 0
         
     }
     
@@ -85,6 +88,8 @@ class PrimaryViewController: UIViewController, CLLocationManagerDelegate{
                 self.selectedLocation.text = "\(city), \(state)"
                 print("You are located in", city, state)
             }
+            
+            self.getWeather()
             
         })
         
@@ -125,7 +130,11 @@ class PrimaryViewController: UIViewController, CLLocationManagerDelegate{
                     print("response: \(responseDictionary)")
                     self.forecasts = responseDictionary.value(forKeyPath: "response.forecasts") as? [NSDictionary]
                     
-                    self.todaysForecast = responseDictionary["currently"] as! [NSDictionary]
+                    self.todaysForecast = responseDictionary["currently"] as! NSDictionary
+                    
+                    self.todayDaily = responseDictionary["daily"] as! NSDictionary
+                    
+                    self.tempCompare()
                     
                 }
             }
@@ -137,18 +146,14 @@ class PrimaryViewController: UIViewController, CLLocationManagerDelegate{
     
     func tempCompare() {
         
-//      return todaysForecast.count
-        
-//      let today = todaysForecast[indexPath.row]
-        
-        let yesterdayTemp = 90
-        let todayTemp = todaysForecast["apparentTemperature"] as! Int
-//      let todayTemp = 90
+        let yesterdayTemp = Int(90)
+        let todayTemp = Int(todaysForecast["apparentTemperature"] as! Float)
+        // let todayTemp = 90
         let temperatureDifference = todayTemp - yesterdayTemp
         let temperatureDelta = abs(temperatureDifference)
         
         
-        currentTemperatureLabel.text = "\(todayTemp)"
+        currentTemperatureLabel.text = "\(todayTemp)°"
         
         
         
@@ -159,6 +164,7 @@ class PrimaryViewController: UIViewController, CLLocationManagerDelegate{
             tempFeelingLabel.textColor = appDelegate.blueColor
             currentTemperatureLabel.textColor = appDelegate.blueColor
             tempFeelingLabel.text = "a lot colder"
+            appDelegate.defaultColor = appDelegate.blueColor
             
         } else if temperatureDifference < -1 && temperatureDelta < 10 {
             
@@ -166,6 +172,7 @@ class PrimaryViewController: UIViewController, CLLocationManagerDelegate{
             tempFeelingLabel.textColor = appDelegate.cyanColor
             currentTemperatureLabel.textColor = appDelegate.cyanColor
             tempFeelingLabel.text = "a little cooler"
+            appDelegate.defaultColor = appDelegate.cyanColor
             
         } else if temperatureDifference > 1 && temperatureDelta < 10 {
             
@@ -173,6 +180,7 @@ class PrimaryViewController: UIViewController, CLLocationManagerDelegate{
             tempFeelingLabel.textColor = appDelegate.orangeColor
             currentTemperatureLabel.textColor = appDelegate.orangeColor
             tempFeelingLabel.text = "a little warmer"
+            appDelegate.defaultColor = appDelegate.orangeColor
             
         } else if temperatureDifference > 1 && temperatureDelta >= 10 {
             
@@ -180,6 +188,7 @@ class PrimaryViewController: UIViewController, CLLocationManagerDelegate{
             tempFeelingLabel.textColor = appDelegate.redColor
             currentTemperatureLabel.textColor = appDelegate.redColor
             tempFeelingLabel.text = "a lot hotter"
+            appDelegate.defaultColor = appDelegate.redColor
             
         } else {
             
@@ -187,7 +196,54 @@ class PrimaryViewController: UIViewController, CLLocationManagerDelegate{
             tempFeelingLabel.textColor = appDelegate.greenColor
             currentTemperatureLabel.textColor = appDelegate.greenColor
             tempFeelingLabel.text = "no different"
+            appDelegate.defaultColor = appDelegate.greenColor
             
+        }
+        
+        self.updateWeatherIcons()
+        
+    }
+    
+    func updateWeatherIcons() {
+        
+          let suggestedIcon = todaysForecast["icon"] as! String
+    
+            switch suggestedIcon {
+            case "clear-day":
+                weatherIcon.image = #imageLiteral(resourceName: "iconSunny")
+            case "clear-night":
+                weatherIcon.image = #imageLiteral(resourceName: "iconNight")
+            case "rain":
+                weatherIcon.image = #imageLiteral(resourceName: "iconRain")
+            case "snow":
+                weatherIcon.image = #imageLiteral(resourceName: "iconSnow")
+            case "sleet":
+                weatherIcon.image = #imageLiteral(resourceName: "iconFlurry")
+            case "wind":
+                weatherIcon.image = #imageLiteral(resourceName: "iconWindy")
+            case "fog":
+                weatherIcon.image = #imageLiteral(resourceName: "iconWindy")
+            case "cloudy":
+                weatherIcon.image = #imageLiteral(resourceName: "iconCloudy")
+            case "partly-cloudy-day":
+                weatherIcon.image = #imageLiteral(resourceName: "iconPartlyCloudy")
+            case "partly-cloudy-night":
+                weatherIcon.image = #imageLiteral(resourceName: "iconPartlyCloudy")
+            default:
+                weatherIcon.image = #imageLiteral(resourceName: "iconNuclear")
+                break
+            }
+        
+        presentUpdatedWeather()
+        
+    }
+    
+    func presentUpdatedWeather() {
+        
+        UIView.animate(withDuration: 0.9) { () -> Void in
+            self.selectedLocation.alpha = 1
+            self.weatherIcon.alpha = 1
+            self.primaryMessageView.alpha = 1
         }
         
     }
