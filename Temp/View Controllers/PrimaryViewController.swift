@@ -23,6 +23,10 @@ class PrimaryViewController: UIViewController, CLLocationManagerDelegate{
     @IBOutlet weak var dayBeforeYesterdayView: UIView!
     @IBOutlet weak var tomorrowView: UIView!
     @IBOutlet weak var dayAfterTomorrowView: UIView!
+    @IBOutlet weak var yesterdayLabel: UILabel!
+    @IBOutlet weak var dayBeforeYesterdayLabel: UILabel!
+    @IBOutlet weak var tomorrowLabel: UILabel!
+    @IBOutlet weak var dayAfterTomorrowLabel: UILabel!
     
     var gradient = CAGradientLayer()
     var forecasts: [NSDictionary]! = []
@@ -30,6 +34,12 @@ class PrimaryViewController: UIViewController, CLLocationManagerDelegate{
     var todayDaily: NSDictionary! = NSDictionary()
     var latitude: Double!
     var longitude: Double!
+    
+    let calendar = NSCalendar.current
+    let yesterday = NSCalendar.current.date(byAdding: .day, value: -1, to: Date())
+    let dayBeforeYesterday = NSCalendar.current.date(byAdding: .day, value: -2, to: Date())
+    let tomorrow = NSCalendar.current.date(byAdding: .day, value: 1, to: Date())
+    let dayAfterTomorrow = NSCalendar.current.date(byAdding: .day, value: 2, to: Date())
     
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
@@ -51,6 +61,23 @@ class PrimaryViewController: UIViewController, CLLocationManagerDelegate{
         selectedLocation.alpha = 0
         weatherIcon.alpha = 0
         primaryMessageView.alpha = 0
+        
+        let yesterdayDay = DateFormatter()
+        yesterdayDay.dateFormat = "EEE"
+        yesterdayLabel.text = yesterdayDay.string(from: yesterday!).uppercased()
+        
+        let dayBeforeYesterdayDay = DateFormatter()
+        dayBeforeYesterdayDay.dateFormat = "EEE"
+        dayBeforeYesterdayLabel.text = dayBeforeYesterdayDay.string(from: dayBeforeYesterday!).uppercased()
+        
+        let tomorrowDay = DateFormatter()
+        tomorrowDay.dateFormat = "EEE"
+        tomorrowLabel.text = tomorrowDay.string(from: tomorrow!).uppercased()
+        
+        let dayAfterTomorrowDay = DateFormatter()
+        dayAfterTomorrowDay.dateFormat = "EEE"
+        dayAfterTomorrowLabel.text = dayAfterTomorrowDay.string(from: dayAfterTomorrow!).uppercased()
+        
         
     }
     

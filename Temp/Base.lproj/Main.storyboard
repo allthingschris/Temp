@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16C41b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="CabinSketch-Bold.ttf">
+        <array key="CabinSketch-Bold.otf">
             <string>CabinSketch-Bold</string>
         </array>
         <array key="Chalet-NewYorkNineteenSeventy.otf">
@@ -189,7 +189,7 @@
                                         <rect key="frame" x="76" y="268" width="222" height="108"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <connections>
-                                            <segue destination="lQO-y8-EjJ" kind="presentation" id="1GR-xE-F0h"/>
+                                            <segue destination="lQO-y8-EjJ" kind="presentation" modalTransitionStyle="crossDissolve" id="1GR-xE-F0h"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -221,13 +221,17 @@
                     <connections>
                         <outlet property="currentDayView" destination="wRf-ws-DP4" id="aBu-ie-sEu"/>
                         <outlet property="currentTemperatureLabel" destination="Dop-EV-aFB" id="PN4-td-aDw"/>
+                        <outlet property="dayAfterTomorrowLabel" destination="frv-c0-Hpd" id="44q-Hu-00t"/>
                         <outlet property="dayAfterTomorrowView" destination="nMg-PT-tt3" id="MaK-u9-uE4"/>
+                        <outlet property="dayBeforeYesterdayLabel" destination="uLy-Wx-eee" id="U2D-Qt-dWR"/>
                         <outlet property="dayBeforeYesterdayView" destination="MaX-tI-ONm" id="JbS-Wq-t5u"/>
                         <outlet property="primaryMessageView" destination="Fe4-ae-vhI" id="tvZ-qh-DRK"/>
                         <outlet property="selectedLocation" destination="7Jy-LY-bn1" id="JY8-oU-lXt"/>
                         <outlet property="tempFeelingLabel" destination="jil-fa-4bo" id="R8O-ty-ntT"/>
+                        <outlet property="tomorrowLabel" destination="KPb-LZ-x2c" id="zce-Tb-Cez"/>
                         <outlet property="tomorrowView" destination="4aX-nL-VhW" id="8h4-XC-L2P"/>
                         <outlet property="weatherIcon" destination="e29-IV-tZa" id="5Wl-pN-x2Q"/>
+                        <outlet property="yesterdayLabel" destination="aPg-4Y-EtR" id="12N-KH-qJ3"/>
                         <outlet property="yesterdayView" destination="wvJ-9j-uTe" id="UMr-Fh-cMw"/>
                     </connections>
                 </viewController>
@@ -774,34 +778,155 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" image="dateSelect" translatesAutoresizingMaskIntoConstraints="NO" id="J2u-ye-CNK">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                            </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jBg-Dg-peN">
-                                <rect key="frame" x="317" y="34" width="39" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RMY-OL-ax6">
+                                <rect key="frame" x="325" y="41" width="28" height="28"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Close"/>
+                                <state key="normal" title="Close" image="dismissIcon"/>
                                 <connections>
-                                    <action selector="didClose:" destination="lQO-y8-EjJ" eventType="touchUpInside" id="fQe-Vx-WkH"/>
+                                    <action selector="didClose:" destination="lQO-y8-EjJ" eventType="touchUpInside" id="I6l-RI-8U0"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Select a Date" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qRk-AD-tTA">
+                                <rect key="frame" x="72" y="48" width="230" height="36"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Chalet-ParisNineteenSixty" family="Chalet-ParisNineteenSixty" pointSize="30"/>
+                                <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CFO-zI-JHj">
+                                <rect key="frame" x="0.0" y="72" width="375" height="502"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vuO-l6-ATb" userLabel="Day Before Yesterday View">
+                                        <rect key="frame" x="0.0" y="20" width="375" height="80"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WLX-b5-U5q" userLabel="DividerLine">
+                                                <rect key="frame" x="20" y="78" width="335" height="2"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                                            </view>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Day Before Yesterday" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IVK-oK-8qv">
+                                                <rect key="frame" x="20" y="20" width="230" height="36"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" name="Chalet-ParisNineteenSixty" family="Chalet-ParisNineteenSixty" pointSize="24"/>
+                                                <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" image="iconSelected" translatesAutoresizingMaskIntoConstraints="NO" id="fO7-vl-61m">
+                                                <rect key="frame" x="318" y="27" width="27" height="22"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                            </imageView>
+                                        </subviews>
+                                    </view>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OZ5-F1-JyH" userLabel="Yesterday View">
+                                        <rect key="frame" x="0.0" y="100" width="375" height="80"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ezl-Rh-gC5" userLabel="DividerLine">
+                                                <rect key="frame" x="20" y="78" width="335" height="2"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                                            </view>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Yesterday" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uhb-7E-KHK">
+                                                <rect key="frame" x="20" y="20" width="230" height="36"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" name="Chalet-ParisNineteenSixty" family="Chalet-ParisNineteenSixty" pointSize="24"/>
+                                                <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" image="iconSelected" translatesAutoresizingMaskIntoConstraints="NO" id="7wz-Vf-50i">
+                                                <rect key="frame" x="318" y="27" width="27" height="22"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                            </imageView>
+                                        </subviews>
+                                    </view>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SSF-Vf-lLQ" userLabel="Today View">
+                                        <rect key="frame" x="0.0" y="180" width="375" height="80"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UEZ-Oj-DWR" userLabel="DividerLine">
+                                                <rect key="frame" x="20" y="78" width="335" height="2"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                                            </view>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Today" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T4A-vW-qdF">
+                                                <rect key="frame" x="20" y="20" width="230" height="36"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" name="Chalet-ParisNineteenSixty" family="Chalet-ParisNineteenSixty" pointSize="24"/>
+                                                <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" image="iconSelected" translatesAutoresizingMaskIntoConstraints="NO" id="OJn-x0-8jI">
+                                                <rect key="frame" x="318" y="27" width="27" height="22"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                            </imageView>
+                                        </subviews>
+                                    </view>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yYJ-Uk-f6B" userLabel="Tomorrow View">
+                                        <rect key="frame" x="0.0" y="260" width="375" height="80"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hef-Lt-IQi" userLabel="DividerLine">
+                                                <rect key="frame" x="20" y="78" width="335" height="2"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                                            </view>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Tomorrow" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EFG-Ou-mKf">
+                                                <rect key="frame" x="20" y="20" width="230" height="36"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" name="Chalet-ParisNineteenSixty" family="Chalet-ParisNineteenSixty" pointSize="24"/>
+                                                <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" image="iconSelected" translatesAutoresizingMaskIntoConstraints="NO" id="qUG-bS-tPO">
+                                                <rect key="frame" x="318" y="27" width="27" height="22"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                            </imageView>
+                                        </subviews>
+                                    </view>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0El-ey-wFf" userLabel="Day After Tomorrow View">
+                                        <rect key="frame" x="0.0" y="340" width="375" height="80"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Day After Tomorrow" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PlJ-Ln-3n1">
+                                                <rect key="frame" x="20" y="20" width="230" height="36"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" name="Chalet-ParisNineteenSixty" family="Chalet-ParisNineteenSixty" pointSize="24"/>
+                                                <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" image="iconSelected" translatesAutoresizingMaskIntoConstraints="NO" id="5bF-CB-TMm">
+                                                <rect key="frame" x="318" y="27" width="27" height="22"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                            </imageView>
+                                        </subviews>
+                                    </view>
+                                </subviews>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="dayAfterTomorrowLabel" destination="PlJ-Ln-3n1" id="XTf-dr-wEi"/>
+                        <outlet property="dayBeforeYesterdayLabel" destination="IVK-oK-8qv" id="YbS-L0-qJV"/>
+                        <outlet property="primaryFocalView" destination="CFO-zI-JHj" id="3h5-nz-Erx"/>
+                        <outlet property="tomorrowLabel" destination="EFG-Ou-mKf" id="LBK-d8-2ks"/>
+                        <outlet property="yesterdayLabel" destination="uhb-7E-KHK" id="L5O-eP-Nsk"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HVS-e8-Jqa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1140" y="471"/>
+            <point key="canvasLocation" x="1140" y="470.91454272863569"/>
         </scene>
     </scenes>
     <resources>
         <image name="Landing Screen" width="375" height="667"/>
         <image name="Weather Detail" width="375" height="801"/>
-        <image name="dateSelect" width="375" height="667"/>
         <image name="dismissIcon" width="28" height="28"/>
         <image name="iconArrow" width="14" height="10"/>
         <image name="iconPartlyCloudy" width="40" height="40"/>
+        <image name="iconSelected" width="27" height="22"/>
         <image name="iconSunny" width="40" height="40"/>
         <image name="locations" width="375" height="667"/>
         <image name="timeOfDay" width="375" height="667"/>
