@@ -24,6 +24,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     public let charcoalGradient = UIColor.init(red: 0/255, green: 0/255, blue: 0/255, alpha: 0.05)
     public let whiteGradient = UIColor.init(red: 255/255, green: 255/255, blue: 255/255, alpha: 0)
     public var defaultColor = UIColor.init(red: 102/255, green: 102/255, blue: 102/255, alpha: 1)
+    
+    public var selectedDate: String = "yesterday"
+    public var selectedTime: String = "morning"
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.

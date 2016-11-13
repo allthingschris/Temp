@@ -27,6 +27,7 @@ class PrimaryViewController: UIViewController, CLLocationManagerDelegate{
     @IBOutlet weak var dayBeforeYesterdayLabel: UILabel!
     @IBOutlet weak var tomorrowLabel: UILabel!
     @IBOutlet weak var dayAfterTomorrowLabel: UILabel!
+    @IBOutlet weak var itFeelsLabel: UILabel!
     
     var gradient = CAGradientLayer()
     var forecasts: [NSDictionary]! = []
@@ -162,6 +163,8 @@ class PrimaryViewController: UIViewController, CLLocationManagerDelegate{
                     self.todayDaily = responseDictionary["daily"] as! NSDictionary
                     
                     self.tempCompare()
+                    
+                    self.updateTimeofDay()
                     
                 }
             }
@@ -322,5 +325,41 @@ class PrimaryViewController: UIViewController, CLLocationManagerDelegate{
         return [0.0, topStopLocation, bottomStartLocation, 1.0]
 
     }
+    
+    func updateTimeofDay(){
+        
+        if appDelegate.selectedTime == "earlyMorning" {
+            
+            itFeelsLabel.text = "Early this morning, it feels"
+            
+        } else if appDelegate.selectedTime == "morning" {
+            
+            itFeelsLabel.text = "This morning, it feels"
+            
+        } else if appDelegate.selectedTime == "afternoon" {
+            
+            itFeelsLabel.text = "This afternoon, it feels"
+            
+        } else if appDelegate.selectedTime == "evening" {
+            
+            itFeelsLabel.text = "This evening, it feels"
+            
+        } else if appDelegate.selectedTime == "night" {
+            
+            itFeelsLabel.text = "Tonight, it feels"
+            
+        } else if appDelegate.selectedTime == "lateNight" {
+            
+            itFeelsLabel.text = "Late tonight, it feels"
+            
+        } else {
+            
+            itFeelsLabel.text = "Right now, it feels"
+            
+        }
+        
+        
+    }
+    
     
 }

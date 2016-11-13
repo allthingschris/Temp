@@ -15,6 +15,11 @@ class SelectADateViewController: UIViewController {
     @IBOutlet weak var dayBeforeYesterdayLabel: UILabel!
     @IBOutlet weak var tomorrowLabel: UILabel!
     @IBOutlet weak var dayAfterTomorrowLabel: UILabel!
+    @IBOutlet weak var dayBeforeYesterdaySelectedIcon: UIImageView!
+    @IBOutlet weak var yesterdaySelectedIcon: UIImageView!
+    @IBOutlet weak var todaySelectedIcon: UIImageView!
+    @IBOutlet weak var tomorrowSelectedIcon: UIImageView!
+    @IBOutlet weak var dayAfterTomorrowSelectedIcon: UIImageView!
     
     var gradient = CAGradientLayer()
 
@@ -30,7 +35,7 @@ class SelectADateViewController: UIViewController {
         super.viewDidLoad()
 
         setupGradient()
- 
+        
         let yesterdayDay = DateFormatter()
         yesterdayDay.dateFormat = "EEEE"
         yesterdayLabel.text = yesterdayDay.string(from: yesterday!)
@@ -46,7 +51,22 @@ class SelectADateViewController: UIViewController {
         let dayAfterTomorrowDay = DateFormatter()
         dayAfterTomorrowDay.dateFormat = "EEEE"
         dayAfterTomorrowLabel.text = dayAfterTomorrowDay.string(from: dayAfterTomorrow!)
-        
+
+                switch appDelegate.selectedDate {
+                case "dayBeforeYesterday":
+                    dayBeforeYesterdaySelectedIcon.alpha = 1
+                case "yesterday":
+                    yesterdaySelectedIcon.alpha = 1
+                case "today":
+                    todaySelectedIcon.alpha = 1
+                case "tomorrow":
+                    tomorrowSelectedIcon.alpha = 1
+                case "dayAfterTomorrow":
+                    dayAfterTomorrowSelectedIcon.alpha = 1
+                default:
+                    break
+                }
+
         
         // Do any additional setup after loading the view.
     }
@@ -109,6 +129,77 @@ class SelectADateViewController: UIViewController {
         dismiss(animated: true, completion: nil)
         
     }
+    
+    @IBAction func didTapDayBeforeYesterday(_ sender: UITapGestureRecognizer) {
+        
+        UIView.animate(withDuration: 0.3) { () -> Void in
+            self.dayBeforeYesterdaySelectedIcon.alpha = 1
+            self.yesterdaySelectedIcon.alpha = 0
+            self.todaySelectedIcon.alpha = 0
+            self.tomorrowSelectedIcon.alpha = 0
+            self.dayAfterTomorrowSelectedIcon.alpha = 0
+        }
+        
+        appDelegate.selectedDate = "dayBeforeYesterday"
+        
+    }
+    
+    @IBAction func didTapYesterday(_ sender: UITapGestureRecognizer) {
+        
+        UIView.animate(withDuration: 0.3) { () -> Void in
+            self.dayBeforeYesterdaySelectedIcon.alpha = 0
+            self.yesterdaySelectedIcon.alpha = 1
+            self.todaySelectedIcon.alpha = 0
+            self.tomorrowSelectedIcon.alpha = 0
+            self.dayAfterTomorrowSelectedIcon.alpha = 0
+        }
+        
+        appDelegate.selectedDate = "yesterday"
+        
+    }
+    
+    @IBAction func didTapToday(_ sender: UITapGestureRecognizer) {
+        
+        UIView.animate(withDuration: 0.3) { () -> Void in
+            self.dayBeforeYesterdaySelectedIcon.alpha = 0
+            self.yesterdaySelectedIcon.alpha = 0
+            self.todaySelectedIcon.alpha = 1
+            self.tomorrowSelectedIcon.alpha = 0
+            self.dayAfterTomorrowSelectedIcon.alpha = 0
+        }
+        
+        appDelegate.selectedDate = "today"
+        
+    }
+    
+    
+    @IBAction func didTapTomorrow(_ sender: UITapGestureRecognizer) {
+        
+        UIView.animate(withDuration: 0.3) { () -> Void in
+            self.dayBeforeYesterdaySelectedIcon.alpha = 0
+            self.yesterdaySelectedIcon.alpha = 0
+            self.todaySelectedIcon.alpha = 0
+            self.tomorrowSelectedIcon.alpha = 1
+            self.dayAfterTomorrowSelectedIcon.alpha = 0
+        }
+        
+        appDelegate.selectedDate = "tomorrow"
+        
+    }
+    
+    @IBAction func didTapDayAfterTomorrow(_ sender: UITapGestureRecognizer) {
+        
+        UIView.animate(withDuration: 0.3) { () -> Void in
+            self.dayBeforeYesterdaySelectedIcon.alpha = 0
+            self.yesterdaySelectedIcon.alpha = 0
+            self.todaySelectedIcon.alpha = 0
+            self.tomorrowSelectedIcon.alpha = 0
+            self.dayAfterTomorrowSelectedIcon.alpha = 1
+        }
+        
+        appDelegate.selectedDate = "dayAfterTomorrow"
+        
+    }
 
     /*
     // MARK: - Navigation
@@ -121,3 +212,4 @@ class SelectADateViewController: UIViewController {
     */
 
 }
+

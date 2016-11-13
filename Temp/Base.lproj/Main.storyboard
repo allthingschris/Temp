@@ -182,14 +182,14 @@
                                         <rect key="frame" x="79" y="31" width="202" height="108"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <connections>
-                                            <segue destination="2qv-kX-6cu" kind="presentation" id="qIK-pR-xP4"/>
+                                            <segue destination="2qv-kX-6cu" kind="presentation" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="qIK-pR-xP4"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gem-gY-JUz">
                                         <rect key="frame" x="76" y="268" width="222" height="108"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <connections>
-                                            <segue destination="lQO-y8-EjJ" kind="presentation" modalTransitionStyle="crossDissolve" id="1GR-xE-F0h"/>
+                                            <segue destination="lQO-y8-EjJ" kind="presentation" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="1GR-xE-F0h"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -225,6 +225,7 @@
                         <outlet property="dayAfterTomorrowView" destination="nMg-PT-tt3" id="MaK-u9-uE4"/>
                         <outlet property="dayBeforeYesterdayLabel" destination="uLy-Wx-eee" id="U2D-Qt-dWR"/>
                         <outlet property="dayBeforeYesterdayView" destination="MaX-tI-ONm" id="JbS-Wq-t5u"/>
+                        <outlet property="itFeelsLabel" destination="C1E-NH-oxs" id="aEg-JI-cSi"/>
                         <outlet property="primaryMessageView" destination="Fe4-ae-vhI" id="tvZ-qh-DRK"/>
                         <outlet property="selectedLocation" destination="7Jy-LY-bn1" id="JY8-oU-lXt"/>
                         <outlet property="tempFeelingLabel" destination="jil-fa-4bo" id="R8O-ty-ntT"/>
@@ -746,25 +747,253 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" image="timeOfDay" translatesAutoresizingMaskIntoConstraints="NO" id="b5j-sQ-yBc">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                            </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7VB-97-xuB">
-                                <rect key="frame" x="313" y="40" width="39" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7VB-97-xuB">
+                                <rect key="frame" x="325" y="41" width="28" height="28"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Close"/>
+                                <state key="normal" image="dismissIcon"/>
                                 <connections>
                                     <action selector="didClose:" destination="2qv-kX-6cu" eventType="touchUpInside" id="dwX-c2-lpB"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1h0-NO-YNC">
+                                <rect key="frame" x="0.0" y="72" width="375" height="502"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hn0-nN-Ray" userLabel="Early Morning View">
+                                        <rect key="frame" x="0.0" y="22" width="375" height="80"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="c0T-Qq-fNW" userLabel="DividerLine">
+                                                <rect key="frame" x="20" y="78" width="335" height="2"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                                            </view>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Early Morning" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r7h-mO-GUy">
+                                                <rect key="frame" x="68" y="20" width="217" height="36"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" name="Chalet-ParisNineteenSixty" family="Chalet-ParisNineteenSixty" pointSize="24"/>
+                                                <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.0" contentMode="center" fixedFrame="YES" image="iconSelected" translatesAutoresizingMaskIntoConstraints="NO" id="elB-ER-H3H">
+                                                <rect key="frame" x="318" y="27" width="27" height="22"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                            </imageView>
+                                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" image="timeEarlyMorningLarge" translatesAutoresizingMaskIntoConstraints="NO" id="FeC-Kh-XaU">
+                                                <rect key="frame" x="20" y="20" width="40" height="40"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                            </imageView>
+                                        </subviews>
+                                        <gestureRecognizers/>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="nUU-EM-Plw" appends="YES" id="m9E-is-fdp"/>
+                                        </connections>
+                                    </view>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ov3-cs-PJr" userLabel="Morning View">
+                                        <rect key="frame" x="0.0" y="102" width="375" height="80"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3fk-Gp-mUx" userLabel="DividerLine">
+                                                <rect key="frame" x="20" y="78" width="335" height="2"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                                            </view>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Morning" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uA2-mG-uV9">
+                                                <rect key="frame" x="68" y="20" width="217" height="36"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" name="Chalet-ParisNineteenSixty" family="Chalet-ParisNineteenSixty" pointSize="24"/>
+                                                <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.0" contentMode="center" fixedFrame="YES" image="iconSelected" translatesAutoresizingMaskIntoConstraints="NO" id="jZK-TM-tSP">
+                                                <rect key="frame" x="318" y="27" width="27" height="22"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                            </imageView>
+                                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" image="timeMorningLarge" translatesAutoresizingMaskIntoConstraints="NO" id="e7X-S6-cnK">
+                                                <rect key="frame" x="20" y="20" width="40" height="40"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                            </imageView>
+                                        </subviews>
+                                        <gestureRecognizers/>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="iFj-9h-LYj" appends="YES" id="7g8-cQ-Nlq"/>
+                                        </connections>
+                                    </view>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Acq-Lm-RXE" userLabel="Afternoon View">
+                                        <rect key="frame" x="0.0" y="182" width="375" height="80"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eWj-8Z-HcR" userLabel="DividerLine">
+                                                <rect key="frame" x="20" y="78" width="335" height="2"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                                            </view>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Afternoon" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Cf-en-TkH">
+                                                <rect key="frame" x="68" y="20" width="217" height="36"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" name="Chalet-ParisNineteenSixty" family="Chalet-ParisNineteenSixty" pointSize="24"/>
+                                                <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.0" contentMode="center" fixedFrame="YES" image="iconSelected" translatesAutoresizingMaskIntoConstraints="NO" id="xFz-9c-MaP">
+                                                <rect key="frame" x="318" y="27" width="27" height="22"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                            </imageView>
+                                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" image="timeNoonLarge" translatesAutoresizingMaskIntoConstraints="NO" id="jAX-0j-i6Z">
+                                                <rect key="frame" x="20" y="20" width="40" height="40"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                            </imageView>
+                                        </subviews>
+                                        <gestureRecognizers/>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="s1e-0O-Hag" appends="YES" id="b9z-ay-6lW"/>
+                                        </connections>
+                                    </view>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VRi-Jz-EzS" userLabel="Evening View">
+                                        <rect key="frame" x="0.0" y="262" width="375" height="80"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PMa-VK-Zhv" userLabel="DividerLine">
+                                                <rect key="frame" x="20" y="78" width="335" height="2"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                                            </view>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Evening" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bbq-bs-5kq">
+                                                <rect key="frame" x="68" y="20" width="217" height="36"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" name="Chalet-ParisNineteenSixty" family="Chalet-ParisNineteenSixty" pointSize="24"/>
+                                                <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.0" contentMode="center" fixedFrame="YES" image="iconSelected" translatesAutoresizingMaskIntoConstraints="NO" id="6ov-YP-8E5">
+                                                <rect key="frame" x="318" y="27" width="27" height="22"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                            </imageView>
+                                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" image="timeEveningLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Ooy-fc-ZGe">
+                                                <rect key="frame" x="20" y="20" width="40" height="40"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                            </imageView>
+                                        </subviews>
+                                        <gestureRecognizers/>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="hwY-WO-Gil" appends="YES" id="8A7-Dv-duZ"/>
+                                        </connections>
+                                    </view>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ld7-gp-M1Z" userLabel="Night View">
+                                        <rect key="frame" x="0.0" y="342" width="375" height="80"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qIP-YI-d2Z" userLabel="DividerLine">
+                                                <rect key="frame" x="20" y="78" width="335" height="2"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                                            </view>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Night" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qpA-8k-w8h">
+                                                <rect key="frame" x="68" y="20" width="217" height="36"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" name="Chalet-ParisNineteenSixty" family="Chalet-ParisNineteenSixty" pointSize="24"/>
+                                                <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.0" contentMode="center" fixedFrame="YES" image="iconSelected" translatesAutoresizingMaskIntoConstraints="NO" id="aoJ-Y7-C7q">
+                                                <rect key="frame" x="318" y="27" width="27" height="22"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                            </imageView>
+                                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" image="timeNightLarge" translatesAutoresizingMaskIntoConstraints="NO" id="AX0-Sb-vnf">
+                                                <rect key="frame" x="20" y="20" width="40" height="40"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                            </imageView>
+                                        </subviews>
+                                        <gestureRecognizers/>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="blt-YD-UPH" appends="YES" id="Fqo-rT-OPO"/>
+                                        </connections>
+                                    </view>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="I7P-rg-kjI" userLabel="Late Night View">
+                                        <rect key="frame" x="0.0" y="422" width="375" height="80"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jkU-px-49E" userLabel="DividerLine">
+                                                <rect key="frame" x="20" y="78" width="335" height="2"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                                            </view>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Late Night" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4UY-38-8gl">
+                                                <rect key="frame" x="68" y="20" width="217" height="36"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" name="Chalet-ParisNineteenSixty" family="Chalet-ParisNineteenSixty" pointSize="24"/>
+                                                <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.0" contentMode="center" fixedFrame="YES" image="iconSelected" translatesAutoresizingMaskIntoConstraints="NO" id="VfY-lQ-ARR">
+                                                <rect key="frame" x="318" y="27" width="27" height="22"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                            </imageView>
+                                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" image="timeLateNightLarge" translatesAutoresizingMaskIntoConstraints="NO" id="80x-o1-wh8">
+                                                <rect key="frame" x="20" y="20" width="40" height="40"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                            </imageView>
+                                        </subviews>
+                                        <gestureRecognizers/>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="efU-SB-OmN" appends="YES" id="Eok-kx-sY5"/>
+                                        </connections>
+                                    </view>
+                                </subviews>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Select a Time" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lqE-GD-m1d">
+                                <rect key="frame" x="62" y="36" width="230" height="36"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Chalet-ParisNineteenSixty" family="Chalet-ParisNineteenSixty" pointSize="30"/>
+                                <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="afternoonSelectedIcon" destination="xFz-9c-MaP" id="ayI-CY-Km2"/>
+                        <outlet property="earlyMorningSelectedIcon" destination="elB-ER-H3H" id="9C6-gV-J9l"/>
+                        <outlet property="eveningSelectedIcon" destination="6ov-YP-8E5" id="Oam-rv-Pgd"/>
+                        <outlet property="lateNightSelectedIcon" destination="VfY-lQ-ARR" id="ROc-tE-hJR"/>
+                        <outlet property="morningSelectedIcon" destination="jZK-TM-tSP" id="Qix-T1-ATB"/>
+                        <outlet property="nightSelectedIcon" destination="aoJ-Y7-C7q" id="a3c-SJ-RlQ"/>
+                        <outlet property="primaryFocalView" destination="1h0-NO-YNC" id="1WB-xn-wJ4"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x70-GF-BPu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="nUU-EM-Plw">
+                    <connections>
+                        <action selector="didTapEarlyMorning:" destination="2qv-kX-6cu" id="goh-13-cmi"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="efU-SB-OmN">
+                    <connections>
+                        <action selector="didTapLateNight:" destination="2qv-kX-6cu" id="s8O-1u-koc"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="blt-YD-UPH">
+                    <connections>
+                        <action selector="didTapNight:" destination="2qv-kX-6cu" id="LXA-j8-l3B"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="hwY-WO-Gil">
+                    <connections>
+                        <action selector="didTapEvening:" destination="2qv-kX-6cu" id="gDj-FL-IvN"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="s1e-0O-Hag">
+                    <connections>
+                        <action selector="didTapAfternoon:" destination="2qv-kX-6cu" id="sp9-7d-CrS"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="iFj-9h-LYj">
+                    <connections>
+                        <action selector="didTapMorning:" destination="2qv-kX-6cu" id="0qX-Ns-BcR"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1140" y="-352"/>
+            <point key="canvasLocation" x="1140" y="-352.17391304347831"/>
         </scene>
         <!--Select a Date View Controller-->
         <scene sceneID="vSZ-93-Ewg">
@@ -787,7 +1016,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Select a Date" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qRk-AD-tTA">
-                                <rect key="frame" x="72" y="48" width="230" height="36"/>
+                                <rect key="frame" x="62" y="36" width="230" height="36"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Chalet-ParisNineteenSixty" family="Chalet-ParisNineteenSixty" pointSize="30"/>
                                 <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -798,7 +1027,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vuO-l6-ATb" userLabel="Day Before Yesterday View">
-                                        <rect key="frame" x="0.0" y="20" width="375" height="80"/>
+                                        <rect key="frame" x="0.0" y="22" width="375" height="80"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WLX-b5-U5q" userLabel="DividerLine">
@@ -813,14 +1042,18 @@
                                                 <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" image="iconSelected" translatesAutoresizingMaskIntoConstraints="NO" id="fO7-vl-61m">
+                                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.0" contentMode="center" fixedFrame="YES" image="iconSelected" translatesAutoresizingMaskIntoConstraints="NO" id="fO7-vl-61m">
                                                 <rect key="frame" x="318" y="27" width="27" height="22"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                             </imageView>
                                         </subviews>
+                                        <gestureRecognizers/>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="sv7-nx-qdu" appends="YES" id="tFZ-qc-ZEc"/>
+                                        </connections>
                                     </view>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OZ5-F1-JyH" userLabel="Yesterday View">
-                                        <rect key="frame" x="0.0" y="100" width="375" height="80"/>
+                                        <rect key="frame" x="0.0" y="102" width="375" height="80"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ezl-Rh-gC5" userLabel="DividerLine">
@@ -835,14 +1068,18 @@
                                                 <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" image="iconSelected" translatesAutoresizingMaskIntoConstraints="NO" id="7wz-Vf-50i">
+                                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.0" contentMode="center" fixedFrame="YES" image="iconSelected" translatesAutoresizingMaskIntoConstraints="NO" id="7wz-Vf-50i">
                                                 <rect key="frame" x="318" y="27" width="27" height="22"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                             </imageView>
                                         </subviews>
+                                        <gestureRecognizers/>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="CXj-Ot-3wn" appends="YES" id="Qmo-8j-ZU9"/>
+                                        </connections>
                                     </view>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SSF-Vf-lLQ" userLabel="Today View">
-                                        <rect key="frame" x="0.0" y="180" width="375" height="80"/>
+                                        <rect key="frame" x="0.0" y="182" width="375" height="80"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UEZ-Oj-DWR" userLabel="DividerLine">
@@ -857,14 +1094,18 @@
                                                 <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" image="iconSelected" translatesAutoresizingMaskIntoConstraints="NO" id="OJn-x0-8jI">
+                                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.0" contentMode="center" fixedFrame="YES" image="iconSelected" translatesAutoresizingMaskIntoConstraints="NO" id="OJn-x0-8jI">
                                                 <rect key="frame" x="318" y="27" width="27" height="22"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                             </imageView>
                                         </subviews>
+                                        <gestureRecognizers/>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="Kww-t1-In5" appends="YES" id="LSm-gp-pJO"/>
+                                        </connections>
                                     </view>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yYJ-Uk-f6B" userLabel="Tomorrow View">
-                                        <rect key="frame" x="0.0" y="260" width="375" height="80"/>
+                                        <rect key="frame" x="0.0" y="262" width="375" height="80"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hef-Lt-IQi" userLabel="DividerLine">
@@ -879,14 +1120,18 @@
                                                 <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" image="iconSelected" translatesAutoresizingMaskIntoConstraints="NO" id="qUG-bS-tPO">
+                                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.0" contentMode="center" fixedFrame="YES" image="iconSelected" translatesAutoresizingMaskIntoConstraints="NO" id="qUG-bS-tPO">
                                                 <rect key="frame" x="318" y="27" width="27" height="22"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                             </imageView>
                                         </subviews>
+                                        <gestureRecognizers/>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="IT0-Mw-mfW" appends="YES" id="Kle-eT-0S3"/>
+                                        </connections>
                                     </view>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0El-ey-wFf" userLabel="Day After Tomorrow View">
-                                        <rect key="frame" x="0.0" y="340" width="375" height="80"/>
+                                        <rect key="frame" x="0.0" y="342" width="375" height="80"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Day After Tomorrow" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PlJ-Ln-3n1">
@@ -896,11 +1141,20 @@
                                                 <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" image="iconSelected" translatesAutoresizingMaskIntoConstraints="NO" id="5bF-CB-TMm">
+                                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.0" contentMode="center" fixedFrame="YES" image="iconSelected" translatesAutoresizingMaskIntoConstraints="NO" id="5bF-CB-TMm">
                                                 <rect key="frame" x="318" y="27" width="27" height="22"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                             </imageView>
+                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1eT-Eh-5yq" userLabel="DividerLine">
+                                                <rect key="frame" x="20" y="78" width="335" height="2"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                                            </view>
                                         </subviews>
+                                        <gestureRecognizers/>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="yZ9-aB-RDN" appends="YES" id="gAs-Oc-05z"/>
+                                        </connections>
                                     </view>
                                 </subviews>
                             </view>
@@ -909,13 +1163,43 @@
                     </view>
                     <connections>
                         <outlet property="dayAfterTomorrowLabel" destination="PlJ-Ln-3n1" id="XTf-dr-wEi"/>
+                        <outlet property="dayAfterTomorrowSelectedIcon" destination="5bF-CB-TMm" id="QY5-Xr-Z91"/>
                         <outlet property="dayBeforeYesterdayLabel" destination="IVK-oK-8qv" id="YbS-L0-qJV"/>
+                        <outlet property="dayBeforeYesterdaySelectedIcon" destination="fO7-vl-61m" id="y7s-iI-IhR"/>
                         <outlet property="primaryFocalView" destination="CFO-zI-JHj" id="3h5-nz-Erx"/>
+                        <outlet property="todaySelectedIcon" destination="OJn-x0-8jI" id="o4K-uB-ANl"/>
                         <outlet property="tomorrowLabel" destination="EFG-Ou-mKf" id="LBK-d8-2ks"/>
+                        <outlet property="tomorrowSelectedIcon" destination="qUG-bS-tPO" id="zWA-b2-bRA"/>
                         <outlet property="yesterdayLabel" destination="uhb-7E-KHK" id="L5O-eP-Nsk"/>
+                        <outlet property="yesterdaySelectedIcon" destination="7wz-Vf-50i" id="7aO-vR-DFD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HVS-e8-Jqa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="Kww-t1-In5">
+                    <connections>
+                        <action selector="didTapToday:" destination="lQO-y8-EjJ" id="FMh-5R-iiW"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="IT0-Mw-mfW">
+                    <connections>
+                        <action selector="didTapTomorrow:" destination="lQO-y8-EjJ" id="b0Y-m4-vX9"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="yZ9-aB-RDN">
+                    <connections>
+                        <action selector="didTapDayAfterTomorrow:" destination="lQO-y8-EjJ" id="9y6-pz-h9E"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="CXj-Ot-3wn">
+                    <connections>
+                        <action selector="didTapYesterday:" destination="lQO-y8-EjJ" id="QSj-u7-26K"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="sv7-nx-qdu">
+                    <connections>
+                        <action selector="didTapDayBeforeYesterday:" destination="lQO-y8-EjJ" id="nuK-YD-XSB"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1140" y="470.91454272863569"/>
         </scene>
@@ -929,6 +1213,11 @@
         <image name="iconSelected" width="27" height="22"/>
         <image name="iconSunny" width="40" height="40"/>
         <image name="locations" width="375" height="667"/>
-        <image name="timeOfDay" width="375" height="667"/>
+        <image name="timeEarlyMorningLarge" width="40" height="40"/>
+        <image name="timeEveningLarge" width="40" height="40"/>
+        <image name="timeLateNightLarge" width="40" height="40"/>
+        <image name="timeMorningLarge" width="40" height="40"/>
+        <image name="timeNightLarge" width="40" height="40"/>
+        <image name="timeNoonLarge" width="40" height="40"/>
     </resources>
 </document>
