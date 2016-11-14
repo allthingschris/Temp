@@ -361,5 +361,13 @@ class PrimaryViewController: UIViewController, CLLocationManagerDelegate{
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        
+        print("I'm appearing!")
+
+        updateTimeofDay()
+        
+    }
+    
     
 }
