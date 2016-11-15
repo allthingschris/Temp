@@ -58,18 +58,15 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qJu-mR-Kn5">
-                                                <rect key="frame" x="0.0" y="0.0" width="71" height="72"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <connections>
-                                                    <segue destination="PYv-8N-zfb" kind="presentation" modalTransitionStyle="crossDissolve" id="skB-Bg-jf3"/>
-                                                </connections>
-                                            </button>
                                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" image="iconArrow" translatesAutoresizingMaskIntoConstraints="NO" id="Lf9-jo-K7U">
                                                 <rect key="frame" x="27" y="70" width="14" height="10"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                             </imageView>
                                         </subviews>
+                                        <gestureRecognizers/>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="4IB-XV-oou" appends="YES" id="ymc-wn-aL3"/>
+                                        </connections>
                                     </view>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wvJ-9j-uTe">
                                         <rect key="frame" x="90" y="-20" width="62" height="85"/>
@@ -90,6 +87,10 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
+                                        <gestureRecognizers/>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="9EO-p6-EyP" appends="YES" id="5Ht-7O-8Vu"/>
+                                        </connections>
                                     </view>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MaX-tI-ONm">
                                         <rect key="frame" x="28" y="-20" width="62" height="85"/>
@@ -110,6 +111,10 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
+                                        <gestureRecognizers/>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="MwH-bS-fa5" appends="YES" id="mWi-5J-cje"/>
+                                        </connections>
                                     </view>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4aX-nL-VhW">
                                         <rect key="frame" x="222" y="-20" width="62" height="85"/>
@@ -130,6 +135,10 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
+                                        <gestureRecognizers/>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="8Wg-8e-ygm" appends="YES" id="mwg-pF-Cax"/>
+                                        </connections>
                                     </view>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nMg-PT-tt3">
                                         <rect key="frame" x="284" y="-20" width="62" height="85"/>
@@ -150,6 +159,10 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
+                                        <gestureRecognizers/>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="sfb-po-01p" appends="YES" id="Ocw-Fc-6RR"/>
+                                        </connections>
                                     </view>
                                 </subviews>
                             </view>
@@ -164,8 +177,8 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Right now, it feels" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C1E-NH-oxs">
-                                        <rect key="frame" x="79" y="31" width="202" height="108"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Right now, it feels" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C1E-NH-oxs" customClass="TTTAttributedLabel">
+                                        <rect key="frame" x="26" y="20" width="323" height="108"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="Chalet-ParisNineteenSixty" family="Chalet-ParisNineteenSixty" pointSize="40"/>
                                         <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -179,17 +192,17 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cmM-2Z-gf6">
-                                        <rect key="frame" x="79" y="31" width="202" height="108"/>
+                                        <rect key="frame" x="26" y="20" width="323" height="108"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <connections>
-                                            <segue destination="2qv-kX-6cu" kind="presentation" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="qIK-pR-xP4"/>
+                                            <segue destination="2qv-kX-6cu" kind="modal" modalTransitionStyle="crossDissolve" id="qIK-pR-xP4"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gem-gY-JUz">
                                         <rect key="frame" x="76" y="268" width="222" height="108"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <connections>
-                                            <segue destination="lQO-y8-EjJ" kind="presentation" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="1GR-xE-F0h"/>
+                                            <segue destination="lQO-y8-EjJ" kind="modal" modalTransitionStyle="crossDissolve" id="1GR-xE-F0h"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -219,6 +232,7 @@
                     </view>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <connections>
+                        <outlet property="comparisonLabel" destination="jcY-0P-HHS" id="VnE-AT-ghf"/>
                         <outlet property="currentDayView" destination="wRf-ws-DP4" id="aBu-ie-sEu"/>
                         <outlet property="currentTemperatureLabel" destination="Dop-EV-aFB" id="PN4-td-aDw"/>
                         <outlet property="dayAfterTomorrowLabel" destination="frv-c0-Hpd" id="44q-Hu-00t"/>
@@ -234,9 +248,35 @@
                         <outlet property="weatherIcon" destination="e29-IV-tZa" id="5Wl-pN-x2Q"/>
                         <outlet property="yesterdayLabel" destination="aPg-4Y-EtR" id="12N-KH-qJ3"/>
                         <outlet property="yesterdayView" destination="wvJ-9j-uTe" id="UMr-Fh-cMw"/>
+                        <segue destination="PYv-8N-zfb" kind="modal" identifier="toDailyDetailView" modalTransitionStyle="crossDissolve" id="ECH-dP-KOy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="8Wg-8e-ygm">
+                    <connections>
+                        <action selector="didTapTomorrow:" destination="BYZ-38-t0r" id="fK5-Ks-xxt"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="4IB-XV-oou">
+                    <connections>
+                        <action selector="didtapCurrentDate:" destination="BYZ-38-t0r" id="DwB-IB-P9q"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="sfb-po-01p">
+                    <connections>
+                        <action selector="didTapDayAfterTomorrow:" destination="BYZ-38-t0r" id="NJa-zK-lA0"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="9EO-p6-EyP">
+                    <connections>
+                        <action selector="didTapYesterday:" destination="BYZ-38-t0r" id="0cM-n5-8xj"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="MwH-bS-fa5">
+                    <connections>
+                        <action selector="didTapDayBeforeYesterday:" destination="BYZ-38-t0r" id="a5N-3P-8Ed"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="136.80000000000001" y="138.98050974512745"/>
         </scene>

@@ -67,7 +67,9 @@ class DailyDetailViewController: UIViewController {
         
         let apiKey = "c8ce828d290027eefc03bf39287d8589"
         let coordinates = "37.8267,-122.4233"
-        let currentDate = "2016-11-11T00:00:00"
+        let currentDate = "\(appDelegate.detailDate)"
+        
+        print(currentDate)
         
         let standardDay = DateFormatter()
         standardDay.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"

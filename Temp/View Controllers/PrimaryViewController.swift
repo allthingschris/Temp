@@ -27,7 +27,8 @@ class PrimaryViewController: UIViewController, CLLocationManagerDelegate{
     @IBOutlet weak var dayBeforeYesterdayLabel: UILabel!
     @IBOutlet weak var tomorrowLabel: UILabel!
     @IBOutlet weak var dayAfterTomorrowLabel: UILabel!
-    @IBOutlet weak var itFeelsLabel: UILabel!
+    @IBOutlet weak var itFeelsLabel: TTTAttributedLabel!
+    @IBOutlet weak var comparisonLabel: UILabel!
     
     var gradient = CAGradientLayer()
     var forecasts: [NSDictionary]! = []
@@ -37,6 +38,7 @@ class PrimaryViewController: UIViewController, CLLocationManagerDelegate{
     var longitude: Double!
     
     let calendar = NSCalendar.current
+    let today = NSCalendar.current
     let yesterday = NSCalendar.current.date(byAdding: .day, value: -1, to: Date())
     let dayBeforeYesterday = NSCalendar.current.date(byAdding: .day, value: -2, to: Date())
     let tomorrow = NSCalendar.current.date(byAdding: .day, value: 1, to: Date())
@@ -63,6 +65,8 @@ class PrimaryViewController: UIViewController, CLLocationManagerDelegate{
         weatherIcon.alpha = 0
         primaryMessageView.alpha = 0
         
+        itFeelsLabel.verticalAlignment = .bottom
+        
         let yesterdayDay = DateFormatter()
         yesterdayDay.dateFormat = "EEE"
         yesterdayLabel.text = yesterdayDay.string(from: yesterday!).uppercased()
@@ -71,6 +75,7 @@ class PrimaryViewController: UIViewController, CLLocationManagerDelegate{
         dayBeforeYesterdayDay.dateFormat = "EEE"
         dayBeforeYesterdayLabel.text = dayBeforeYesterdayDay.string(from: dayBeforeYesterday!).uppercased()
         
+        
         let tomorrowDay = DateFormatter()
         tomorrowDay.dateFormat = "EEE"
         tomorrowLabel.text = tomorrowDay.string(from: tomorrow!).uppercased()
@@ -78,7 +83,8 @@ class PrimaryViewController: UIViewController, CLLocationManagerDelegate{
         let dayAfterTomorrowDay = DateFormatter()
         dayAfterTomorrowDay.dateFormat = "EEE"
         dayAfterTomorrowLabel.text = dayAfterTomorrowDay.string(from: dayAfterTomorrow!).uppercased()
-        
+ 
+
         
     }
     
@@ -118,6 +124,8 @@ class PrimaryViewController: UIViewController, CLLocationManagerDelegate{
             }
             
             self.getWeather()
+            
+            self.getYesterdaysWeather()
             
         })
         
@@ -166,6 +174,8 @@ class PrimaryViewController: UIViewController, CLLocationManagerDelegate{
                     
                     self.updateTimeofDay()
                     
+                    self.updateReferenceDate()
+                    
                 }
             }
         });
@@ -177,8 +187,8 @@ class PrimaryViewController: UIViewController, CLLocationManagerDelegate{
     func tempCompare() {
         
         let yesterdayTemp = Int(90)
+        let comparisonTemp = Int(80)
         let todayTemp = Int(todaysForecast["apparentTemperature"] as! Float)
-        // let todayTemp = 90
         let temperatureDifference = todayTemp - yesterdayTemp
         let temperatureDelta = abs(temperatureDifference)
         
@@ -330,44 +340,171 @@ class PrimaryViewController: UIViewController, CLLocationManagerDelegate{
         
         if appDelegate.selectedTime == "earlyMorning" {
             
-            itFeelsLabel.text = "Early this morning, it feels"
+            itFeelsLabel.text = "Early morning,\n it feels"
             
         } else if appDelegate.selectedTime == "morning" {
             
-            itFeelsLabel.text = "This morning, it feels"
+            itFeelsLabel.text = "This morning,\n it feels"
             
         } else if appDelegate.selectedTime == "afternoon" {
             
-            itFeelsLabel.text = "This afternoon, it feels"
+            itFeelsLabel.text = "This afternoon,\n it feels"
             
         } else if appDelegate.selectedTime == "evening" {
             
-            itFeelsLabel.text = "This evening, it feels"
+            itFeelsLabel.text = "This evening,\n it feels"
             
         } else if appDelegate.selectedTime == "night" {
             
-            itFeelsLabel.text = "Tonight, it feels"
+            itFeelsLabel.text = "Tonight,\n it feels"
             
         } else if appDelegate.selectedTime == "lateNight" {
             
-            itFeelsLabel.text = "Late tonight, it feels"
+            itFeelsLabel.text = "Late tonight,\n it feels"
             
         } else {
             
-            itFeelsLabel.text = "Right now, it feels"
+            itFeelsLabel.text = "Right now,\n it feels"
             
         }
         
         
     }
     
-    override func viewWillAppear(_ animated: Bool) {
+    func updateReferenceDate(){
         
-        print("I'm appearing!")
+        let dayBeforeYesterdayExtended = DateFormatter()
+        dayBeforeYesterdayExtended.dateFormat = "EEEE"
 
-        updateTimeofDay()
+        let dayAfterTomorrowExtended = DateFormatter()
+        dayAfterTomorrowExtended.dateFormat = "EEEE"
+       
+        
+        if appDelegate.selectedDate == "dayBeforeYesterday" {
+            
+            comparisonLabel.text = "than \(dayBeforeYesterdayExtended.string(from: dayBeforeYesterday!))."
+            
+        } else if appDelegate.selectedDate == "yesterday" {
+            
+            comparisonLabel.text = "than yesterday."
+            
+        } else if appDelegate.selectedDate == "tomorrow" {
+            
+            comparisonLabel.text = "than tomorrow."
+            
+        } else if appDelegate.selectedDate == "dayAfterTomorrow" {
+            
+            comparisonLabel.text = "than \(dayAfterTomorrowExtended.string(from: dayAfterTomorrow!))."
+            
+        } else {
+            
+            print("No change!")
+            
+        }
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        
+        print("I'm appearing!")
+        
+        print(dayBeforeYesterday as Any)
+        print(yesterday as Any)
+        print(today as Any)
+        print(tomorrow as Any)
+        print(dayAfterTomorrow as Any)
+
+        updateTimeofDay()
+        
+        updateReferenceDate()
+        
+        getYesterdaysWeather()
+        
+    }
+    
+    func getYesterdaysWeather(){
+        
+//        let yesterdayAsUNIXString = DateFormatter()
+//        yesterdayAsUNIXString.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+//        let yesterdayForAPI = yesterdayAsUNIXString.string(from: yesterday!)
+//        
+//        let apiKey = "c8ce828d290027eefc03bf39287d8589"
+//        let coordinates = "\(latitude!),\(longitude!)"
+//        
+//        print(coordinates)
+//        print("https://api.darksky.net/forecast/\(apiKey)/\(coordinates)/\(yesterdayForAPI)")
+//        
+//        let url = URL(string:"https://api.darksky.net/forecast/\(apiKey)/\(coordinates)/()")
+//        let request = URLRequest(url: url!)
+//        let session = URLSession(
+//            configuration: URLSessionConfiguration.default,
+//            delegate:nil,
+//            delegateQueue:OperationQueue.main
+//        )
+//        
+//        let task : URLSessionDataTask = session.dataTask(with: request,completionHandler: { (dataOrNil, response, error) in
+//            if let data = dataOrNil {
+//                if let responseDictionary = try! JSONSerialization.jsonObject(with: data, options:[]) as? NSDictionary {
+//                    print("response: \(responseDictionary)")
+//                    self.forecasts = responseDictionary.value(forKeyPath: "response.forecasts") as? [NSDictionary]
+//                    
+//                    self.todaysForecast = responseDictionary["currently"] as! NSDictionary
+//                    
+//                    self.todayDaily = responseDictionary["daily"] as! NSDictionary
+//                    
+//                    self.tempCompare()
+//                    
+//                    self.updateTimeofDay()
+//                    
+//                    self.updateReferenceDate()
+//                    
+//                }
+//            }
+//        });
+//        task.resume()
+//        
+//        print(yesterdayForAPI)
+        
+    }
+    
+    
+    @IBAction func didTapDayBeforeYesterday(_ sender: UITapGestureRecognizer) {
+  
+        print(appDelegate.detailDate)
+        
+        performSegue(withIdentifier: "toDailyDetailView", sender: nil)
+        appDelegate.detailDate = "\(dayBeforeYesterday)"
+        
+        print(appDelegate.detailDate)
+        
+    }
+    
+    
+    @IBAction func didTapYesterday(_ sender: UITapGestureRecognizer) {
+        
+        performSegue(withIdentifier: "toDailyDetailView", sender: nil)
+        appDelegate.detailDate = "\(yesterday)"
+        
+    }
+    
+    @IBAction func didtapCurrentDate(_ sender: UITapGestureRecognizer) {
+
+        performSegue(withIdentifier: "toDailyDetailView", sender: nil)
+        appDelegate.detailDate = "\(today)"
+        
+    }
+    
+    @IBAction func didTapTomorrow(_ sender: UITapGestureRecognizer) {
+        
+        performSegue(withIdentifier: "toDailyDetailView", sender: nil)
+        appDelegate.detailDate = "\(tomorrow)"
+    }
+    
+    @IBAction func didTapDayAfterTomorrow(_ sender: UITapGestureRecognizer) {
+        
+        performSegue(withIdentifier: "toDailyDetailView", sender: nil)
+        appDelegate.detailDate = "\(dayAfterTomorrow)"
+        
+    }
     
 }
