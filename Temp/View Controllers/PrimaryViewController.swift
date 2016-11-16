@@ -424,46 +424,49 @@ class PrimaryViewController: UIViewController, CLLocationManagerDelegate{
     
     func getYesterdaysWeather(){
         
-//        let yesterdayAsUNIXString = DateFormatter()
-//        yesterdayAsUNIXString.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
-//        let yesterdayForAPI = yesterdayAsUNIXString.string(from: yesterday!)
-//        
-//        let apiKey = "c8ce828d290027eefc03bf39287d8589"
-//        let coordinates = "\(latitude!),\(longitude!)"
-//        
-//        print(coordinates)
-//        print("https://api.darksky.net/forecast/\(apiKey)/\(coordinates)/\(yesterdayForAPI)")
-//        
-//        let url = URL(string:"https://api.darksky.net/forecast/\(apiKey)/\(coordinates)/()")
-//        let request = URLRequest(url: url!)
-//        let session = URLSession(
-//            configuration: URLSessionConfiguration.default,
-//            delegate:nil,
-//            delegateQueue:OperationQueue.main
-//        )
-//        
-//        let task : URLSessionDataTask = session.dataTask(with: request,completionHandler: { (dataOrNil, response, error) in
-//            if let data = dataOrNil {
-//                if let responseDictionary = try! JSONSerialization.jsonObject(with: data, options:[]) as? NSDictionary {
-//                    print("response: \(responseDictionary)")
-//                    self.forecasts = responseDictionary.value(forKeyPath: "response.forecasts") as? [NSDictionary]
-//                    
-//                    self.todaysForecast = responseDictionary["currently"] as! NSDictionary
-//                    
-//                    self.todayDaily = responseDictionary["daily"] as! NSDictionary
-//                    
-//                    self.tempCompare()
-//                    
-//                    self.updateTimeofDay()
-//                    
-//                    self.updateReferenceDate()
-//                    
-//                }
-//            }
-//        });
-//        task.resume()
-//        
-//        print(yesterdayForAPI)
+        let yesterdayAsUNIXString = DateFormatter()
+        yesterdayAsUNIXString.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+        let yesterdayForAPI = yesterdayAsUNIXString.string(from: yesterday!)
+
+        print(yesterdayForAPI)
+        
+        
+        let apiKey = "c8ce828d290027eefc03bf39287d8589"
+        let coordinates = "\(latitude!),\(longitude!)"
+        
+        print(coordinates)
+        print("https://api.darksky.net/forecast/\(apiKey)/\(coordinates)/\(yesterdayForAPI)")
+        
+        let url = URL(string:"https://api.darksky.net/forecast/\(apiKey)/\(coordinates)/\(yesterdayForAPI)")
+        let request = URLRequest(url: url!)
+        let session = URLSession(
+            configuration: URLSessionConfiguration.default,
+            delegate:nil,
+            delegateQueue:OperationQueue.main
+        )
+        
+        let task : URLSessionDataTask = session.dataTask(with: request,completionHandler: { (dataOrNil, response, error) in
+            if let data = dataOrNil {
+                if let responseDictionary = try! JSONSerialization.jsonObject(with: data, options:[]) as? NSDictionary {
+                    print("response: \(responseDictionary)")
+                    self.forecasts = responseDictionary.value(forKeyPath: "response.forecasts") as? [NSDictionary]
+                    
+                    self.todaysForecast = responseDictionary["currently"] as! NSDictionary
+                    
+                    self.todayDaily = responseDictionary["daily"] as! NSDictionary
+                    
+                    self.tempCompare()
+                    
+                    self.updateTimeofDay()
+                    
+                    self.updateReferenceDate()
+                    
+                }
+            }
+        });
+        task.resume()
+        
+        print(yesterdayForAPI)
         
     }
     

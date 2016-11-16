@@ -65,28 +65,45 @@ class DailyDetailViewController: UIViewController {
     
     func getWeather() {
         
+        let calendar = NSCalendar.current
+        let today = NSCalendar.current
+        let yesterday = NSCalendar.current.date(byAdding: .day, value: -1, to: Date())
+        let dayBeforeYesterday = NSCalendar.current.date(byAdding: .day, value: -2, to: Date())
+        let tomorrow = NSCalendar.current.date(byAdding: .day, value: 1, to: Date())
+        let dayAfterTomorrow = NSCalendar.current.date(byAdding: .day, value: 2, to: Date())
+        
         let apiKey = "c8ce828d290027eefc03bf39287d8589"
         let coordinates = "37.8267,-122.4233"
-        let currentDate = "\(appDelegate.detailDate)"
+        let currentDate = "\(yesterday)"
+//      let currentDate = "\(appDelegate.detailDate)"
+//      let currentDate = "2016-11-15T22:42:17-0500"
+        
+        
         
         print(currentDate)
         
         let standardDay = DateFormatter()
-        standardDay.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+        standardDay.dateFormat = "yyyy-MM-dd HH:mm:ss Z"
         let testDate = standardDay.date(from: currentDate)
+        
+        print(testDate as Any)
         
         let readableDate = DateFormatter()
         readableDate.dateStyle = .long
-        selectedDate.text = readableDate.string(from: testDate!)
+        selectedDate.text = readableDate.string(from: yesterday!)
         
         let readableDay = DateFormatter()
         readableDay.dateFormat = "EEEE"
-        selectedDay.text = readableDay.string(from: testDate!)
+        selectedDay.text = readableDay.string(from: yesterday!)
+        
+        let dayForAPI = DateFormatter()
+        dayForAPI.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+        let dayForAPIFinal = dayForAPI.string(from: yesterday!)
         
         print(coordinates)
-        print("https://api.darksky.net/forecast/\(apiKey)/\(coordinates),\(currenltDate)")
+        print("https://api.darksky.net/forecast/\(apiKey)/\(coordinates),\(dayForAPIFinal)")
         
-        let url = URL(string:"https://api.darksky.net/forecast/\(apiKey)/\(coordinates),\(currentDate)")
+        let url = URL(string:"https://api.darksky.net/forecast/\(apiKey)/\(coordinates),\(dayForAPIFinal)")
         let request = URLRequest(url: url!)
         let session = URLSession(
             configuration: URLSessionConfiguration.default,
