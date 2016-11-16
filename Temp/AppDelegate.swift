@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     public let greenColor = UIColor.init(red: 51/255, green: 181/255, blue: 75/255, alpha: 1)
     public let orangeColor = UIColor.init(red: 242/255, green: 91/255, blue: 38/255, alpha: 1)
     public let redColor = UIColor.init(red: 194/255, green: 41/255, blue: 46/255, alpha: 1)
-    public let charcoalGradient = UIColor.init(red: 0/255, green: 0/255, blue: 0/255, alpha: 0.05)
+    public let charcoalGradient = UIColor.init(red: 0/255, green: 0/255, blue: 0/255, alpha: 0.1)
     public let whiteGradient = UIColor.init(red: 255/255, green: 255/255, blue: 255/255, alpha: 0)
     public var defaultColor = UIColor.init(red: 102/255, green: 102/255, blue: 102/255, alpha: 1)
     
@@ -29,6 +29,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     public var selectedTime: String = "morning"
     
     public var detailDate: String = ""
+    
+    public var staticLatitude: Double!
+    public var staticLongitude: Double!
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.

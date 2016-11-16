@@ -38,7 +38,7 @@ class PrimaryViewController: UIViewController, CLLocationManagerDelegate{
     var longitude: Double!
     
     let calendar = NSCalendar.current
-    let today = NSCalendar.current
+    let today = NSCalendar.current.date(byAdding: .day, value: 0, to: Date())
     let yesterday = NSCalendar.current.date(byAdding: .day, value: -1, to: Date())
     let dayBeforeYesterday = NSCalendar.current.date(byAdding: .day, value: -2, to: Date())
     let tomorrow = NSCalendar.current.date(byAdding: .day, value: 1, to: Date())
@@ -110,8 +110,8 @@ class PrimaryViewController: UIViewController, CLLocationManagerDelegate{
         
         print("Latitude is", location.coordinate.latitude, "and longitude is", location.coordinate.longitude)
         
-        latitude = location.coordinate.latitude
-        longitude = location.coordinate.longitude
+        appDelegate.staticLatitude = location.coordinate.latitude
+        appDelegate.staticLongitude = location.coordinate.longitude
         
         CLGeocoder().reverseGeocodeLocation(location, completionHandler: { (placemarks, error) -> Void in
             
@@ -147,12 +147,27 @@ class PrimaryViewController: UIViewController, CLLocationManagerDelegate{
     func getWeather() {
         
         let apiKey = "c8ce828d290027eefc03bf39287d8589"
-        let coordinates = "\(latitude!),\(longitude!)"
+        let coordinates = "\(appDelegate.staticLatitude!),\(appDelegate.staticLongitude!)"
+        
+        let currentDate = "\(today!)"
+        
+        print(currentDate)
+        
+        let standardDay = DateFormatter()
+        standardDay.dateFormat = "yyyy-MM-dd HH:mm:ss Z"
+        let testDate = standardDay.date(from: currentDate)
+        
+        print("The new date is \(testDate)")
+        
+        let dayForAPI = DateFormatter()
+        dayForAPI.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+        let dayForAPIFinal = dayForAPI.string(from: testDate!)
+       
         
         print(coordinates)
         print("https://api.darksky.net/forecast/\(apiKey)/\(coordinates)")
         
-        let url = URL(string:"https://api.darksky.net/forecast/\(apiKey)/\(coordinates)")
+        let url = URL(string:"https://api.darksky.net/forecast/\(apiKey)/\(coordinates),\(dayForAPIFinal)")
         let request = URLRequest(url: url!)
         let session = URLSession(
             configuration: URLSessionConfiguration.default,
@@ -258,17 +273,17 @@ class PrimaryViewController: UIViewController, CLLocationManagerDelegate{
             case "snow":
                 weatherIcon.image = #imageLiteral(resourceName: "iconSnow")
             case "sleet":
-                weatherIcon.image = #imageLiteral(resourceName: "iconFlurry")
+                weatherIcon.image = #imageLiteral(resourceName: "iconSleet")
             case "wind":
                 weatherIcon.image = #imageLiteral(resourceName: "iconWindy")
             case "fog":
-                weatherIcon.image = #imageLiteral(resourceName: "iconWindy")
+                weatherIcon.image = #imageLiteral(resourceName: "iconFoggy")
             case "cloudy":
                 weatherIcon.image = #imageLiteral(resourceName: "iconCloudy")
             case "partly-cloudy-day":
                 weatherIcon.image = #imageLiteral(resourceName: "iconPartlyCloudy")
             case "partly-cloudy-night":
-                weatherIcon.image = #imageLiteral(resourceName: "iconPartlyCloudy")
+                weatherIcon.image = #imageLiteral(resourceName: "iconPartlyCloudyNight")
             default:
                 weatherIcon.image = #imageLiteral(resourceName: "iconNuclear")
                 break
@@ -407,73 +422,65 @@ class PrimaryViewController: UIViewController, CLLocationManagerDelegate{
     override func viewWillAppear(_ animated: Bool) {
         
         print("I'm appearing!")
-        
-        print(dayBeforeYesterday as Any)
-        print(yesterday as Any)
-        print(today as Any)
-        print(tomorrow as Any)
-        print(dayAfterTomorrow as Any)
-
+    
         updateTimeofDay()
         
         updateReferenceDate()
-        
-        getYesterdaysWeather()
-        
+            
     }
     
     func getYesterdaysWeather(){
         
-        let yesterdayAsUNIXString = DateFormatter()
-        yesterdayAsUNIXString.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
-        let yesterdayForAPI = yesterdayAsUNIXString.string(from: yesterday!)
-
-        print(yesterdayForAPI)
-        
-        
-        let apiKey = "c8ce828d290027eefc03bf39287d8589"
-        let coordinates = "\(latitude!),\(longitude!)"
-        
-        print(coordinates)
-        print("https://api.darksky.net/forecast/\(apiKey)/\(coordinates)/\(yesterdayForAPI)")
-        
-        let url = URL(string:"https://api.darksky.net/forecast/\(apiKey)/\(coordinates)/\(yesterdayForAPI)")
-        let request = URLRequest(url: url!)
-        let session = URLSession(
-            configuration: URLSessionConfiguration.default,
-            delegate:nil,
-            delegateQueue:OperationQueue.main
-        )
-        
-        let task : URLSessionDataTask = session.dataTask(with: request,completionHandler: { (dataOrNil, response, error) in
-            if let data = dataOrNil {
-                if let responseDictionary = try! JSONSerialization.jsonObject(with: data, options:[]) as? NSDictionary {
-                    print("response: \(responseDictionary)")
-                    self.forecasts = responseDictionary.value(forKeyPath: "response.forecasts") as? [NSDictionary]
-                    
-                    self.todaysForecast = responseDictionary["currently"] as! NSDictionary
-                    
-                    self.todayDaily = responseDictionary["daily"] as! NSDictionary
-                    
-                    self.tempCompare()
-                    
-                    self.updateTimeofDay()
-                    
-                    self.updateReferenceDate()
-                    
-                }
-            }
-        });
-        task.resume()
-        
-        print(yesterdayForAPI)
+//        let yesterdayAsUNIXString = DateFormatter()
+//        yesterdayAsUNIXString.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+//        let yesterdayForAPI = yesterdayAsUNIXString.string(from: yesterday!)
+//
+//        print(yesterdayForAPI)
+//        
+//        
+//        let apiKey = "c8ce828d290027eefc03bf39287d8589"
+//        let coordinates = "\(latitude!),\(longitude!)"
+//        
+//        print(coordinates)
+//        print("https://api.darksky.net/forecast/\(apiKey)/\(coordinates)/\(yesterdayForAPI)")
+//        
+//        let url = URL(string:"https://api.darksky.net/forecast/\(apiKey)/\(coordinates)/\(yesterdayForAPI)")
+//        let request = URLRequest(url: url!)
+//        let session = URLSession(
+//            configuration: URLSessionConfiguration.default,
+//            delegate:nil,
+//            delegateQueue:OperationQueue.main
+//        )
+//        
+//        let task : URLSessionDataTask = session.dataTask(with: request,completionHandler: { (dataOrNil, response, error) in
+//            if let data = dataOrNil {
+//                if let responseDictionary = try! JSONSerialization.jsonObject(with: data, options:[]) as? NSDictionary {
+//                    print("response: \(responseDictionary)")
+//                    self.forecasts = responseDictionary.value(forKeyPath: "response.forecasts") as? [NSDictionary]
+//                    
+//                    self.todaysForecast = responseDictionary["currently"] as! NSDictionary
+//                    
+//                    self.todayDaily = responseDictionary["daily"] as! NSDictionary
+//                    
+//                    self.tempCompare()
+//                    
+//                    self.updateTimeofDay()
+//                    
+//                    self.updateReferenceDate()
+//                    
+//                }
+//            }
+//        });
+//        task.resume()
+//        
+//        print(yesterdayForAPI)
         
     }
     
     
     @IBAction func didTapDayBeforeYesterday(_ sender: UITapGestureRecognizer) {
   
-        appDelegate.detailDate = "\(dayBeforeYesterday)"
+        appDelegate.detailDate = "\(dayBeforeYesterday!)"
         performSegue(withIdentifier: "toDailyDetailView", sender: nil)
         
     }
@@ -481,28 +488,28 @@ class PrimaryViewController: UIViewController, CLLocationManagerDelegate{
     
     @IBAction func didTapYesterday(_ sender: UITapGestureRecognizer) {
  
-        appDelegate.detailDate = "\(yesterday)"
+        appDelegate.detailDate = "\(yesterday!)"
         performSegue(withIdentifier: "toDailyDetailView", sender: nil)
         
     }
     
     @IBAction func didtapCurrentDate(_ sender: UITapGestureRecognizer) {
 
-        appDelegate.detailDate = "\(today)"
+        appDelegate.detailDate = "\(today!)"
         performSegue(withIdentifier: "toDailyDetailView", sender: nil)
         
     }
     
     @IBAction func didTapTomorrow(_ sender: UITapGestureRecognizer) {
   
-        appDelegate.detailDate = "\(tomorrow)"
+        appDelegate.detailDate = "\(tomorrow!)"
         performSegue(withIdentifier: "toDailyDetailView", sender: nil)
         
     }
     
     @IBAction func didTapDayAfterTomorrow(_ sender: UITapGestureRecognizer) {
  
-        appDelegate.detailDate = "\(dayAfterTomorrow)"
+        appDelegate.detailDate = "\(dayAfterTomorrow!)"
         performSegue(withIdentifier: "toDailyDetailView", sender: nil)
         
     }

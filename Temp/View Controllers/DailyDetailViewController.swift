@@ -18,15 +18,23 @@ class DailyDetailViewController: UIViewController {
     @IBOutlet weak var nowTemp: UILabel!
     @IBOutlet weak var apparentMinTempLabel: UILabel!
     @IBOutlet weak var apparentMaxTempLabel: UILabel!
-    @IBOutlet weak var hourlyScrollView: UIScrollView!
     @IBOutlet weak var primaryFocalView: UIView!
     @IBOutlet weak var weatherIcon: UIImageView!
     @IBOutlet weak var selectedDay: UILabel!
     @IBOutlet weak var selectedDate: UILabel!
     @IBOutlet weak var horizontalDivTop: UIView!
-    @IBOutlet weak var horizontalDivBottom: UIView!
+    @IBOutlet weak var temperatureMaxLabel: UILabel!
+    @IBOutlet weak var sunriseValue: UILabel!
+    @IBOutlet weak var sunsetValue: UILabel!
+    @IBOutlet weak var chanceOfRainValue: UILabel!
+    @IBOutlet weak var dewPointValue: UILabel!
+    @IBOutlet weak var humidityValue: UILabel!
+    @IBOutlet weak var pressureValue: UILabel!
+    @IBOutlet weak var ozoneValue: UILabel!
+    @IBOutlet weak var visibilityValue: UILabel!
+    @IBOutlet weak var windValue: UILabel!
     
-    var todayDaily: NSDictionary! = NSDictionary()
+    var todayDaily: [NSDictionary]! = []
     var todayHourly: [NSDictionary]! = []
     var todaysForecast: NSDictionary! = NSDictionary()
     var gradient = CAGradientLayer()
@@ -39,8 +47,6 @@ class DailyDetailViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         
-        hourlyScrollView.contentSize = CGSize(width: 1479, height: 129)
-        
         apparentMaxTempLabel.alpha = 0
         apparentMinTempLabel.alpha = 0
         nowTemp.alpha = 0
@@ -48,9 +54,7 @@ class DailyDetailViewController: UIViewController {
         weatherIcon.alpha = 0
         selectedDay.alpha = 0
         selectedDate.alpha = 0
-        hourlyScrollView.alpha = 0
         horizontalDivTop.alpha = 0
-        horizontalDivBottom.alpha = 0
         
         setupGradient()
         
@@ -65,20 +69,10 @@ class DailyDetailViewController: UIViewController {
     
     func getWeather() {
         
-        let calendar = NSCalendar.current
-        let today = NSCalendar.current
-        let yesterday = NSCalendar.current.date(byAdding: .day, value: -1, to: Date())
-        let dayBeforeYesterday = NSCalendar.current.date(byAdding: .day, value: -2, to: Date())
-        let tomorrow = NSCalendar.current.date(byAdding: .day, value: 1, to: Date())
-        let dayAfterTomorrow = NSCalendar.current.date(byAdding: .day, value: 2, to: Date())
-        
         let apiKey = "c8ce828d290027eefc03bf39287d8589"
-        let coordinates = "37.8267,-122.4233"
-        let currentDate = "\(yesterday)"
-//      let currentDate = "\(appDelegate.detailDate)"
-//      let currentDate = "2016-11-15T22:42:17-0500"
+        let coordinates = "\(appDelegate.staticLatitude!),\(appDelegate.staticLongitude!)"
         
-        
+        let currentDate = "\(appDelegate.detailDate)"
         
         print(currentDate)
         
@@ -86,19 +80,19 @@ class DailyDetailViewController: UIViewController {
         standardDay.dateFormat = "yyyy-MM-dd HH:mm:ss Z"
         let testDate = standardDay.date(from: currentDate)
         
-        print(testDate as Any)
+        print("The new date is \(testDate)")
         
         let readableDate = DateFormatter()
         readableDate.dateStyle = .long
-        selectedDate.text = readableDate.string(from: yesterday!)
+        selectedDate.text = readableDate.string(from: testDate!)
         
         let readableDay = DateFormatter()
         readableDay.dateFormat = "EEEE"
-        selectedDay.text = readableDay.string(from: yesterday!)
+        selectedDay.text = readableDay.string(from: testDate!)
         
         let dayForAPI = DateFormatter()
         dayForAPI.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
-        let dayForAPIFinal = dayForAPI.string(from: yesterday!)
+        let dayForAPIFinal = dayForAPI.string(from: testDate!)
         
         print(coordinates)
         print("https://api.darksky.net/forecast/\(apiKey)/\(coordinates),\(dayForAPIFinal)")
@@ -118,13 +112,17 @@ class DailyDetailViewController: UIViewController {
                     
                     self.todaysForecast = responseDictionary["currently"] as! NSDictionary
                     
-                    self.todayDaily = responseDictionary["daily"] as! NSDictionary
+                    self.todayDaily = responseDictionary.value(forKeyPath: "daily.data") as! [NSDictionary]
                     
                     self.todayHourly = responseDictionary.value(forKeyPath: "hourly.data") as! [NSDictionary]
+                    
+                    
                     
                     let firstHour = self.todayHourly[0]
                     let apparentTemperature = firstHour["apparentTemperature"] as! Float
                     print("Apparent: \(apparentTemperature)")
+                    
+                    
                     
                     self.updateWeatherValues()
                     
@@ -138,54 +136,81 @@ class DailyDetailViewController: UIViewController {
     
     func updateWeatherValues() {
         
-        let summary = todayDaily["summary"]
-        let apparentMinTemp = Int(61.4)
-        let apparentMaxTemp = Int(78.5)
         let currentTemp = Int(todaysForecast["apparentTemperature"] as! Float)
         
+        let dailyData = self.todayDaily[0]
+        let maxTemperature = Int(dailyData["temperatureMax"] as! Float)
+        let minTemperature = Int(dailyData["temperatureMin"] as! Float)
+        let sunrise = dailyData["sunriseTime"]
+        let sunset = dailyData["sunsetTime"]
+        let chanceOfRain = "\(dailyData["precipProbability"] as! Float)%"
+        let humidity = dailyData["humidity"] as! Float
+        let wind = dailyData["windSpeed"] as! Float
+        let dewPoint = dailyData["dewPoint"] as! Float
+        let visibility = dailyData["visibility"] as! Float
+        let pressure = dailyData["pressure"] as! Float
+        let ozone = dailyData["ozone"] as! Float
+        let dailyIcon = dailyData["icon"] as! String
+        
+        let summary = dailyData["summary"] as! String
+        
+        let sunriseAsDate = DateFormatter()
+        sunriseAsDate.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let sunriseAsDateActual = sunriseAsDate.date(from: sunrise as! String)
+        
+        print("The new date is \(sunriseAsDateActual)")
+        
+        let readableSunrise = DateFormatter()
+        readableSunrise.timeStyle = .short
+        sunriseValue.text = readableSunrise.string(from: sunriseAsDateActual!)
+        
+        apparentMaxTempLabel.text = "\(maxTemperature)°"
+        apparentMinTempLabel.text = "\(minTemperature)°"
+//        sunriseValue.text = "\(sunrise)"
+        sunsetValue.text = "\(sunset)"
+        chanceOfRainValue.text = "\(chanceOfRain)"
+        humidityValue.text = "\(humidity)"
+        windValue.text = "\(wind)"
+        dewPointValue.text = "\(dewPoint)"
+        visibilityValue.text = "\(visibility)"
+        pressureValue.text = "\(pressure)"
+        ozoneValue.text = "\(ozone)"
+        
         nowTemp.textColor = appDelegate.defaultColor
-        dailySummary.text = summary as! String?
+        dailySummary.text = summary
         nowTemp.text = "\(currentTemp)°"
-        apparentMaxTempLabel.text = "\(apparentMaxTemp)°"
-        apparentMinTempLabel.text = "\(apparentMinTemp)°"
-        
-        updateWeatherIcons()
-        
-    }
-    
-    func updateWeatherIcons() {
-        
-//      let suggestedIcon = todayDaily["icon"] as! String
-    
-//        switch suggestedIcon {
-//        case "clear-day":
-//            weatherIcon.image = #imageLiteral(resourceName: "iconSunny")
-//        case "clear-night":
-//            weatherIcon.image = #imageLiteral(resourceName: "iconNight")
-//        case "rain":
-//            weatherIcon.image = #imageLiteral(resourceName: "iconRain")
-//        case "snow":
-//            weatherIcon.image = #imageLiteral(resourceName: "iconSnow")
-//        case "sleet":
-//            weatherIcon.image = #imageLiteral(resourceName: "iconFlurry")
-//        case "wind":
-//            weatherIcon.image = #imageLiteral(resourceName: "iconWindy")
-//        case "fog":
-//            weatherIcon.image = #imageLiteral(resourceName: "iconWindy")
-//        case "cloudy":
-//            weatherIcon.image = #imageLiteral(resourceName: "iconCloudy")
-//        case "partly-cloudy-day":
-//            weatherIcon.image = #imageLiteral(resourceName: "iconPartlyCloudy")
-//        case "partly-cloudy-night":
-//            weatherIcon.image = #imageLiteral(resourceName: "iconPartlyCloudy")
-//        default:
-//            weatherIcon.image = #imageLiteral(resourceName: "iconNuclear")
-//            break
-//        }
-        
+
+        switch dailyIcon {
+        case "clear-day":
+            weatherIcon.image = #imageLiteral(resourceName: "iconSunny")
+        case "clear-night":
+            weatherIcon.image = #imageLiteral(resourceName: "iconNight")
+        case "rain":
+            weatherIcon.image = #imageLiteral(resourceName: "iconRain")
+        case "snow":
+            weatherIcon.image = #imageLiteral(resourceName: "iconSnow")
+        case "sleet":
+            weatherIcon.image = #imageLiteral(resourceName: "iconSleet")
+        case "wind":
+            weatherIcon.image = #imageLiteral(resourceName: "iconWindy")
+        case "fog":
+            weatherIcon.image = #imageLiteral(resourceName: "iconFoggy")
+        case "cloudy":
+            weatherIcon.image = #imageLiteral(resourceName: "iconCloudy")
+        case "partly-cloudy-day":
+            weatherIcon.image = #imageLiteral(resourceName: "iconPartlyCloudy")
+        case "partly-cloudy-night":
+            weatherIcon.image = #imageLiteral(resourceName: "iconPartlyCloudyNight")
+        default:
+            weatherIcon.image = #imageLiteral(resourceName: "iconNuclear")
+            break
+        }
+
         presentUpdatedWeather()
         
     }
+    
+    
     
     func presentUpdatedWeather() {
         
@@ -197,9 +222,7 @@ class DailyDetailViewController: UIViewController {
             self.weatherIcon.alpha = 1
             self.selectedDay.alpha = 1
             self.selectedDate.alpha = 1
-            self.hourlyScrollView.alpha = 1
             self.horizontalDivTop.alpha = 1
-            self.horizontalDivBottom.alpha = 1
         }
         
     }
