@@ -84,7 +84,7 @@ class DailyDetailViewController: UIViewController {
         selectedDay.text = readableDay.string(from: testDate!)
         
         print(coordinates)
-        print("https://api.darksky.net/forecast/\(apiKey)/\(coordinates),\(currentDate)")
+        print("https://api.darksky.net/forecast/\(apiKey)/\(coordinates),\(currenltDate)")
         
         let url = URL(string:"https://api.darksky.net/forecast/\(apiKey)/\(coordinates),\(currentDate)")
         let request = URLRequest(url: url!)

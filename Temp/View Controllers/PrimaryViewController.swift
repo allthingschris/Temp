@@ -470,40 +470,37 @@ class PrimaryViewController: UIViewController, CLLocationManagerDelegate{
     
     @IBAction func didTapDayBeforeYesterday(_ sender: UITapGestureRecognizer) {
   
-        print(appDelegate.detailDate)
-        
-        performSegue(withIdentifier: "toDailyDetailView", sender: nil)
         appDelegate.detailDate = "\(dayBeforeYesterday)"
-        
-        print(appDelegate.detailDate)
+        performSegue(withIdentifier: "toDailyDetailView", sender: nil)
         
     }
     
     
     @IBAction func didTapYesterday(_ sender: UITapGestureRecognizer) {
-        
-        performSegue(withIdentifier: "toDailyDetailView", sender: nil)
+ 
         appDelegate.detailDate = "\(yesterday)"
+        performSegue(withIdentifier: "toDailyDetailView", sender: nil)
         
     }
     
     @IBAction func didtapCurrentDate(_ sender: UITapGestureRecognizer) {
 
-        performSegue(withIdentifier: "toDailyDetailView", sender: nil)
         appDelegate.detailDate = "\(today)"
+        performSegue(withIdentifier: "toDailyDetailView", sender: nil)
         
     }
     
     @IBAction func didTapTomorrow(_ sender: UITapGestureRecognizer) {
-        
-        performSegue(withIdentifier: "toDailyDetailView", sender: nil)
+  
         appDelegate.detailDate = "\(tomorrow)"
+        performSegue(withIdentifier: "toDailyDetailView", sender: nil)
+        
     }
     
     @IBAction func didTapDayAfterTomorrow(_ sender: UITapGestureRecognizer) {
-        
-        performSegue(withIdentifier: "toDailyDetailView", sender: nil)
+ 
         appDelegate.detailDate = "\(dayAfterTomorrow)"
+        performSegue(withIdentifier: "toDailyDetailView", sender: nil)
         
     }
     
