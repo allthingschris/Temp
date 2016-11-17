@@ -26,13 +26,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     public var defaultColor = UIColor.init(red: 102/255, green: 102/255, blue: 102/255, alpha: 1)
     
     public var selectedDate: String = "yesterday"
-    public var selectedTime: String = "morning"
+    public var selectedTime: String = "rightNow"
     
-    public var detailDate: String = ""
+    public var detailDate: String = "Current"
     
-    public var staticLatitude: Double!
-    public var staticLongitude: Double!
-
+    public var staticLatitude: Double! = 33.016667
+    public var staticLongitude: Double! = -96.683333
+    public var locationName: String = ""
+    
+    public var staticTodayTemp: Int! = 0
+    public var staticComparisonTemp: Int! = 0
+    public var staticYesterdaysTemp: Int! = 0
+    public var staticDayBeforeYesterdaysTemp: Int! = 0
+    public var staticTomorrowsTemp: Int! = 0
+    public var staticDayAfterTomorrowsTemp: Int! = 0
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         return true

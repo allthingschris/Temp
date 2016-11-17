@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7C0510F31DDCC21100BD3491 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0510F21DDCC21100BD3491 /* LoadingViewController.swift */; };
+		7C0510F61DDCC30200BD3491 /* BaseTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0510F41DDCC30200BD3491 /* BaseTransition.swift */; };
+		7C0510F71DDCC30200BD3491 /* FadeTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0510F51DDCC30200BD3491 /* FadeTransition.swift */; };
 		830F21391DC8A5F800B058F7 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830F21381DC8A5F800B058F7 /* Common.swift */; };
 		835C49D51DC694C400EBB2DF /* CabinSketch-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 835C49D21DC694C400EBB2DF /* CabinSketch-Bold.otf */; };
 		835C49D61DC694C400EBB2DF /* CabinSketch-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 835C49D31DC694C400EBB2DF /* CabinSketch-Regular.otf */; };
@@ -49,6 +52,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7C0510F21DDCC21100BD3491 /* LoadingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
+		7C0510F41DDCC30200BD3491 /* BaseTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTransition.swift; sourceTree = "<group>"; };
+		7C0510F51DDCC30200BD3491 /* FadeTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FadeTransition.swift; sourceTree = "<group>"; };
 		830F21381DC8A5F800B058F7 /* Common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 		835C49D21DC694C400EBB2DF /* CabinSketch-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CabinSketch-Bold.otf"; sourceTree = "<group>"; };
 		835C49D31DC694C400EBB2DF /* CabinSketch-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CabinSketch-Regular.otf"; sourceTree = "<group>"; };
@@ -182,6 +188,7 @@
 				A840D0641DC90E970094316C /* SelectALocationViewController.swift */,
 				A840D0621DC90DDB0094316C /* SelectATimeViewController.swift */,
 				83A8BB8B1DC58269003AA884 /* PrimaryViewController.swift */,
+				7C0510F21DDCC21100BD3491 /* LoadingViewController.swift */,
 			);
 			name = "View Controllers";
 			path = ..;
@@ -190,6 +197,8 @@
 		83A8BB8E1DC58880003AA884 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				7C0510F41DDCC30200BD3491 /* BaseTransition.swift */,
+				7C0510F51DDCC30200BD3491 /* FadeTransition.swift */,
 				835C49D21DC694C400EBB2DF /* CabinSketch-Bold.otf */,
 				835C49D81DC6993000EBB2DF /* Chalet-NewYorkNineteenSeventy.otf */,
 				835C49D31DC694C400EBB2DF /* CabinSketch-Regular.otf */,
@@ -281,7 +290,7 @@
 				TargetAttributes = {
 					83A8BB591DC5807D003AA884 = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = 7H4UKKHAVX;
+						DevelopmentTeam = HLFRHB9RM8;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Maps.iOS = {
@@ -410,10 +419,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				A849BAB31DC90F9E00AFB579 /* SelectADateViewController.swift in Sources */,
+				7C0510F61DDCC30200BD3491 /* BaseTransition.swift in Sources */,
 				A849BAB11DC90F5200AFB579 /* DailyDetailViewController.swift in Sources */,
 				830F21391DC8A5F800B058F7 /* Common.swift in Sources */,
 				A840D0651DC90E970094316C /* SelectALocationViewController.swift in Sources */,
 				83A8BB601DC5807D003AA884 /* ViewController.swift in Sources */,
+				7C0510F71DDCC30200BD3491 /* FadeTransition.swift in Sources */,
+				7C0510F31DDCC21100BD3491 /* LoadingViewController.swift in Sources */,
 				A840D0631DC90DDB0094316C /* SelectATimeViewController.swift in Sources */,
 				83A8BB8C1DC58269003AA884 /* PrimaryViewController.swift in Sources */,
 				83A8BB5E1DC5807D003AA884 /* AppDelegate.swift in Sources */,
@@ -569,7 +581,7 @@
 			baseConfigurationReference = A5024A0956F95AD5CF71FFEF /* Pods-Temp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 7H4UKKHAVX;
+				DEVELOPMENT_TEAM = HLFRHB9RM8;
 				INFOPLIST_FILE = Temp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = tapthings.Temp;
@@ -583,7 +595,7 @@
 			baseConfigurationReference = A77C64C173B35E27DB7D3C89 /* Pods-Temp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 7H4UKKHAVX;
+				DEVELOPMENT_TEAM = HLFRHB9RM8;
 				INFOPLIST_FILE = Temp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = tapthings.Temp;

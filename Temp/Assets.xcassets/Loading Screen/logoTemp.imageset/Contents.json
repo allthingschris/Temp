@@ -2,11 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "iconClose.pdf",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "logoRedraw.pdf",
       "scale" : "2x"
     },
     {

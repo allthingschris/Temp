@@ -13,29 +13,43 @@ import MapKit
 
 class PrimaryViewController: UIViewController, CLLocationManagerDelegate{
     
-    @IBOutlet weak var tempFeelingLabel: TTTAttributedLabel!
-    @IBOutlet weak var selectedLocation: UILabel!
     @IBOutlet weak var primaryMessageView: UIView!
+    @IBOutlet weak var tempListView: UIView!
+    @IBOutlet weak var selectedLocation: UILabel!
+    @IBOutlet weak var itFeelsLabel: TTTAttributedLabel!
+    @IBOutlet weak var tempFeelingLabel: TTTAttributedLabel!
+    @IBOutlet weak var comparisonLabel: UILabel!
+    @IBOutlet weak var currentDayView: UIView!
     @IBOutlet weak var currentTemperatureLabel: UILabel!
     @IBOutlet weak var weatherIcon: UIImageView!
-    @IBOutlet weak var currentDayView: UIView!
-    @IBOutlet weak var yesterdayView: UIView!
     @IBOutlet weak var dayBeforeYesterdayView: UIView!
-    @IBOutlet weak var tomorrowView: UIView!
-    @IBOutlet weak var dayAfterTomorrowView: UIView!
-    @IBOutlet weak var yesterdayLabel: UILabel!
     @IBOutlet weak var dayBeforeYesterdayLabel: UILabel!
+    @IBOutlet weak var dayBeforeYesterdayTempLabel: UILabel!
+    @IBOutlet weak var yesterdayView: UIView!
+    @IBOutlet weak var yesterdayLabel: UILabel!
+    @IBOutlet weak var yesterdayTempLabel: UILabel!
+    @IBOutlet weak var tomorrowView: UIView!
     @IBOutlet weak var tomorrowLabel: UILabel!
+    @IBOutlet weak var tomorrowTempLabel: UILabel!
+    @IBOutlet weak var dayAfterTomorrowView: UIView!
     @IBOutlet weak var dayAfterTomorrowLabel: UILabel!
-    @IBOutlet weak var itFeelsLabel: TTTAttributedLabel!
-    @IBOutlet weak var comparisonLabel: UILabel!
+    @IBOutlet weak var dayAfterTomorrowTempLabel: UILabel!
     
     var gradient = CAGradientLayer()
     var forecasts: [NSDictionary]! = []
     var todaysForecast: NSDictionary! = NSDictionary()
     var todayDaily: NSDictionary! = NSDictionary()
+    var yesterdaysForecast: NSDictionary! = NSDictionary()
+    var yesterdaysDaily: NSDictionary! = NSDictionary()
+    var dayBeforeYesterdaysForecast: NSDictionary! = NSDictionary()
+    var dayBeforeYesterdaysDaily: NSDictionary! = NSDictionary()
+    var tomorrowsForecast: NSDictionary! = NSDictionary()
+    var tomorrowsDaily: NSDictionary! = NSDictionary()
+    var dayAfterTomorrowsForecast: NSDictionary! = NSDictionary()
+    var dayAfterTomorrowsDaily: NSDictionary! = NSDictionary()
     var latitude: Double!
     var longitude: Double!
+    var comparisonTemp = Int(80)
     
     let calendar = NSCalendar.current
     let today = NSCalendar.current.date(byAdding: .day, value: 0, to: Date())
@@ -64,6 +78,7 @@ class PrimaryViewController: UIViewController, CLLocationManagerDelegate{
         selectedLocation.alpha = 0
         weatherIcon.alpha = 0
         primaryMessageView.alpha = 0
+        tempListView.alpha = 0
         
         itFeelsLabel.verticalAlignment = .bottom
         
@@ -123,11 +138,11 @@ class PrimaryViewController: UIViewController, CLLocationManagerDelegate{
                 print("You are located in", city, state)
             }
             
-            self.getWeather()
             
-            self.getYesterdaysWeather()
             
         })
+        
+        self.getWeather()
         
         // If location was updated within the last minute
         let timeInterval = Date().timeIntervalSince(location.timestamp)
@@ -146,7 +161,8 @@ class PrimaryViewController: UIViewController, CLLocationManagerDelegate{
     
     func getWeather() {
         
-        let apiKey = "c8ce828d290027eefc03bf39287d8589"
+        
+        let apiKey = "ed431aaf78bd9b48e6647d64b1271ebd"
         let coordinates = "\(appDelegate.staticLatitude!),\(appDelegate.staticLongitude!)"
         
         let currentDate = "\(today!)"
@@ -185,6 +201,211 @@ class PrimaryViewController: UIViewController, CLLocationManagerDelegate{
                     
                     self.todayDaily = responseDictionary["daily"] as! NSDictionary
                     
+//                    self.tempCompare()
+//                    
+//                    self.updateTimeofDay()
+//                    
+//                    self.updateReferenceDate()
+                    
+                    self.getYesterdaysWeather()
+                }
+            }
+        });
+        task.resume()
+        
+    }
+ 
+    
+    func getYesterdaysWeather(){
+        
+        let apiKey = "ed431aaf78bd9b48e6647d64b1271ebd"
+        let coordinates = "\(appDelegate.staticLatitude!),\(appDelegate.staticLongitude!)"
+        
+        let currentDate = "\(yesterday!)"
+        
+        print(currentDate)
+        
+        let standardDay = DateFormatter()
+        standardDay.dateFormat = "yyyy-MM-dd HH:mm:ss Z"
+        let testDate = standardDay.date(from: currentDate)
+        
+        print("The new date is \(testDate)")
+        
+        let yesterdayAsUNIXString = DateFormatter()
+        yesterdayAsUNIXString.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+        let yesterdayForAPI = yesterdayAsUNIXString.string(from: testDate!)
+        
+        print(coordinates)
+        print("https://api.darksky.net/forecast/\(apiKey)/\(coordinates)")
+        
+        let url = URL(string:"https://api.darksky.net/forecast/\(apiKey)/\(coordinates),\(yesterdayForAPI)")
+        let request = URLRequest(url: url!)
+        let session = URLSession(
+            configuration: URLSessionConfiguration.default,
+            delegate:nil,
+            delegateQueue:OperationQueue.main
+        )
+        
+        let task : URLSessionDataTask = session.dataTask(with: request,completionHandler: { (dataOrNil, response, error) in
+            if let data = dataOrNil {
+                if let responseDictionary = try! JSONSerialization.jsonObject(with: data, options:[]) as? NSDictionary {
+                    print("response: \(responseDictionary)")
+                    self.forecasts = responseDictionary.value(forKeyPath: "response.forecasts") as? [NSDictionary]
+                    
+                    self.yesterdaysForecast = responseDictionary["currently"] as! NSDictionary
+                    
+                    self.yesterdaysDaily = responseDictionary["daily"] as! NSDictionary
+
+                    self.getDayBeforeYesterdaysWeather()
+                   
+                }
+            }
+        });
+        task.resume()
+        
+    }
+    
+    
+    func getDayBeforeYesterdaysWeather(){
+        
+        let apiKey = "ed431aaf78bd9b48e6647d64b1271ebd"
+        let coordinates = "\(appDelegate.staticLatitude!),\(appDelegate.staticLongitude!)"
+        
+        let currentDate = "\(dayBeforeYesterday!)"
+        
+        print(currentDate)
+        
+        let standardDay = DateFormatter()
+        standardDay.dateFormat = "yyyy-MM-dd HH:mm:ss Z"
+        let testDate = standardDay.date(from: currentDate)
+        
+        print("The new date is \(testDate)")
+        
+        let dayBeforeYesterdayAsUNIXString = DateFormatter()
+        dayBeforeYesterdayAsUNIXString.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+        let dayBeforeYesterdayForAPI = dayBeforeYesterdayAsUNIXString.string(from: testDate!)
+        
+        print(coordinates)
+        print("https://api.darksky.net/forecast/\(apiKey)/\(coordinates)")
+        
+        let url = URL(string:"https://api.darksky.net/forecast/\(apiKey)/\(coordinates),\(dayBeforeYesterdayForAPI)")
+        let request = URLRequest(url: url!)
+        let session = URLSession(
+            configuration: URLSessionConfiguration.default,
+            delegate:nil,
+            delegateQueue:OperationQueue.main
+        )
+        
+        let task : URLSessionDataTask = session.dataTask(with: request,completionHandler: { (dataOrNil, response, error) in
+            if let data = dataOrNil {
+                if let responseDictionary = try! JSONSerialization.jsonObject(with: data, options:[]) as? NSDictionary {
+                    print("response: \(responseDictionary)")
+                    self.forecasts = responseDictionary.value(forKeyPath: "response.forecasts") as? [NSDictionary]
+                    
+                    self.dayBeforeYesterdaysForecast = responseDictionary["currently"] as! NSDictionary
+                    
+                    self.dayBeforeYesterdaysDaily = responseDictionary["daily"] as! NSDictionary
+                    
+                    self.getTomorrowsWeather()
+                    
+                }
+            }
+        });
+        task.resume()
+        
+    }
+    
+    
+    func getTomorrowsWeather(){
+        
+        let apiKey = "ed431aaf78bd9b48e6647d64b1271ebd"
+        let coordinates = "\(appDelegate.staticLatitude!),\(appDelegate.staticLongitude!)"
+        
+        let currentDate = "\(tomorrow!)"
+        
+        print(currentDate)
+        
+        let standardDay = DateFormatter()
+        standardDay.dateFormat = "yyyy-MM-dd HH:mm:ss Z"
+        let testDate = standardDay.date(from: currentDate)
+        
+        print("The new date is \(testDate)")
+        
+        let tomorrowAsUNIXString = DateFormatter()
+        tomorrowAsUNIXString.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+        let tomorrowForAPI = tomorrowAsUNIXString.string(from: testDate!)
+        
+        print(coordinates)
+        print("https://api.darksky.net/forecast/\(apiKey)/\(coordinates)")
+        
+        let url = URL(string:"https://api.darksky.net/forecast/\(apiKey)/\(coordinates),\(tomorrowForAPI)")
+        let request = URLRequest(url: url!)
+        let session = URLSession(
+            configuration: URLSessionConfiguration.default,
+            delegate:nil,
+            delegateQueue:OperationQueue.main
+        )
+        
+        let task : URLSessionDataTask = session.dataTask(with: request,completionHandler: { (dataOrNil, response, error) in
+            if let data = dataOrNil {
+                if let responseDictionary = try! JSONSerialization.jsonObject(with: data, options:[]) as? NSDictionary {
+                    print("response: \(responseDictionary)")
+                    self.forecasts = responseDictionary.value(forKeyPath: "response.forecasts") as? [NSDictionary]
+                    
+                    self.tomorrowsForecast = responseDictionary["currently"] as! NSDictionary
+                    
+                    self.tomorrowsDaily = responseDictionary["daily"] as! NSDictionary
+                    
+                    self.getDayAfterTomorrowsWeather()
+                    
+                }
+            }
+        });
+        task.resume()
+        
+    }
+    
+    
+    func getDayAfterTomorrowsWeather(){
+        
+        let apiKey = "ed431aaf78bd9b48e6647d64b1271ebd"
+        let coordinates = "\(appDelegate.staticLatitude!),\(appDelegate.staticLongitude!)"
+        
+        let currentDate = "\(dayAfterTomorrow!)"
+        
+        print(currentDate)
+        
+        let standardDay = DateFormatter()
+        standardDay.dateFormat = "yyyy-MM-dd HH:mm:ss Z"
+        let testDate = standardDay.date(from: currentDate)
+        
+        print("The new date is \(testDate)")
+        
+        let dayAfterTomorrowAsUNIXString = DateFormatter()
+        dayAfterTomorrowAsUNIXString.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+        let dayAfterTomorrowForAPI = dayAfterTomorrowAsUNIXString.string(from: testDate!)
+        
+        print(coordinates)
+        print("https://api.darksky.net/forecast/\(apiKey)/\(coordinates)")
+        
+        let url = URL(string:"https://api.darksky.net/forecast/\(apiKey)/\(coordinates),\(dayAfterTomorrowForAPI)")
+        let request = URLRequest(url: url!)
+        let session = URLSession(
+            configuration: URLSessionConfiguration.default,
+            delegate:nil,
+            delegateQueue:OperationQueue.main
+        )
+        
+        let task : URLSessionDataTask = session.dataTask(with: request,completionHandler: { (dataOrNil, response, error) in
+            if let data = dataOrNil {
+                if let responseDictionary = try! JSONSerialization.jsonObject(with: data, options:[]) as? NSDictionary {
+                    print("response: \(responseDictionary)")
+                    self.forecasts = responseDictionary.value(forKeyPath: "response.forecasts") as? [NSDictionary]
+                    
+                    self.dayAfterTomorrowsForecast = responseDictionary["currently"] as! NSDictionary
+                    
+                    self.dayAfterTomorrowsDaily = responseDictionary["daily"] as! NSDictionary
+                    
                     self.tempCompare()
                     
                     self.updateTimeofDay()
@@ -201,19 +422,74 @@ class PrimaryViewController: UIViewController, CLLocationManagerDelegate{
     
     func tempCompare() {
         
-        let yesterdayTemp = Int(90)
-        let comparisonTemp = Int(80)
+//      var comparisonTemp = Int(80)
         let todayTemp = Int(todaysForecast["apparentTemperature"] as! Float)
-        let temperatureDifference = todayTemp - yesterdayTemp
-        let temperatureDelta = abs(temperatureDifference)
+        let yesterdayTemp = Int(yesterdaysForecast["apparentTemperature"] as! Float)
+        let dayBeforeYesterdayTemp = Int(dayBeforeYesterdaysForecast["apparentTemperature"] as! Float)
+        let tomorrowTemp = Int(tomorrowsForecast["apparentTemperature"] as! Float)
+        let dayAfterTomorrowTemp = Int(dayAfterTomorrowsForecast["apparentTemperature"] as! Float)
+ 
         
+        appDelegate.staticTodayTemp = Int(todaysForecast["apparentTemperature"] as! Float)
+        appDelegate.staticYesterdaysTemp = Int(yesterdaysForecast["apparentTemperature"] as! Float)
+        appDelegate.staticDayBeforeYesterdaysTemp = Int(dayBeforeYesterdaysForecast["apparentTemperature"] as! Float)
+        appDelegate.staticTomorrowsTemp = Int(tomorrowsForecast["apparentTemperature"] as! Float)
+        appDelegate.staticDayAfterTomorrowsTemp = Int(dayAfterTomorrowsForecast["apparentTemperature"] as! Float)
         
         currentTemperatureLabel.text = "\(todayTemp)°"
+        yesterdayTempLabel.text = "\(yesterdayTemp)°"
+        dayBeforeYesterdayTempLabel.text = "\(dayBeforeYesterdayTemp)°"
+        tomorrowTempLabel.text = "\(tomorrowTemp)°"
+        dayAfterTomorrowTempLabel.text = "\(dayAfterTomorrowTemp)°"
+        
+        if appDelegate.locationName == "San Francisco" {
+            
+            selectedLocation.text = "San Francisco, CA"
+            
+        } else if appDelegate.locationName == "Atlanta" {
+            
+            selectedLocation.text = "Atlanta, GA"
+            
+        } else if appDelegate.locationName == "Chernobyl" {
+            
+            selectedLocation.text = "Chernobyl, Ukraine"
+            weatherIcon.image = #imageLiteral(resourceName: "iconNuclear")
+            
+        } else {
+            
+            selectedLocation.text = "Plano, TX"
+            
+        }
         
         
+        if appDelegate.selectedDate == "yesterday" {
+            
+            comparisonTemp = yesterdayTemp
+            
+        } else if appDelegate.selectedDate == "dayBeforeYesterday" {
+            
+            comparisonTemp = dayBeforeYesterdayTemp
+            
+        } else if appDelegate.selectedDate == "tomorrow" {
+            
+            comparisonTemp = tomorrowTemp
+            
+        } else if appDelegate.selectedDate == "dayAfterTomorrow" {
+            
+            comparisonTemp = dayAfterTomorrowTemp
+            
+        } else {
+        
+            comparisonTemp = todayTemp
+            
+        }
         
         
-        if temperatureDifference < -1 && temperatureDelta >= 10 {
+        let temperatureDifference = todayTemp - comparisonTemp
+        let temperatureDelta = abs(temperatureDifference)
+
+        
+        if temperatureDifference < -10 && temperatureDelta >= 10 {
             
             print("Blue")
             tempFeelingLabel.textColor = appDelegate.blueColor
@@ -221,23 +497,23 @@ class PrimaryViewController: UIViewController, CLLocationManagerDelegate{
             tempFeelingLabel.text = "a lot colder"
             appDelegate.defaultColor = appDelegate.blueColor
             
-        } else if temperatureDifference < -1 && temperatureDelta < 10 {
+        } else if temperatureDifference < -3 && temperatureDelta < 10 {
             
             print("Light Blue")
             tempFeelingLabel.textColor = appDelegate.cyanColor
             currentTemperatureLabel.textColor = appDelegate.cyanColor
-            tempFeelingLabel.text = "a little cooler"
+            tempFeelingLabel.text = "a bit cooler"
             appDelegate.defaultColor = appDelegate.cyanColor
             
-        } else if temperatureDifference > 1 && temperatureDelta < 10 {
+        } else if temperatureDifference > 3 && temperatureDelta < 10 {
             
             print("Orange")
             tempFeelingLabel.textColor = appDelegate.orangeColor
             currentTemperatureLabel.textColor = appDelegate.orangeColor
-            tempFeelingLabel.text = "a little warmer"
+            tempFeelingLabel.text = "a bit warmer"
             appDelegate.defaultColor = appDelegate.orangeColor
             
-        } else if temperatureDifference > 1 && temperatureDelta >= 10 {
+        } else if temperatureDifference > 10 && temperatureDelta >= 10 {
             
             print("Red")
             tempFeelingLabel.textColor = appDelegate.redColor
@@ -258,6 +534,106 @@ class PrimaryViewController: UIViewController, CLLocationManagerDelegate{
         self.updateWeatherIcons()
         
     }
+    
+    func tempCompareSecondTime(){
+        
+        print(appDelegate.staticTodayTemp)
+        print(appDelegate.staticYesterdaysTemp)
+        
+        
+        if appDelegate.locationName == "San Francisco" {
+            
+            selectedLocation.text = "San Francisco, CA"
+            
+        } else if appDelegate.locationName == "Atlanta" {
+            
+            selectedLocation.text = "Atlanta, GA"
+            
+        } else if appDelegate.locationName == "Chernobyl" {
+            
+            selectedLocation.text = "Chernobyl, Ukraine"
+            weatherIcon.image = #imageLiteral(resourceName: "iconNuclear")
+            
+        } else {
+            
+            selectedLocation.text = "Plano, TX"
+            
+        }
+
+        
+        if appDelegate.selectedDate == "yesterday" {
+            
+            comparisonTemp = appDelegate.staticYesterdaysTemp
+            
+        } else if appDelegate.selectedDate == "dayBeforeYesterday" {
+            
+            comparisonTemp = appDelegate.staticDayBeforeYesterdaysTemp
+            
+        } else if appDelegate.selectedDate == "tomorrow" {
+            
+            comparisonTemp = appDelegate.staticTomorrowsTemp
+            
+        } else if appDelegate.selectedDate == "dayAfterTomorrow" {
+            
+            comparisonTemp = appDelegate.staticDayAfterTomorrowsTemp
+            
+        } else {
+            
+            comparisonTemp = appDelegate.staticTodayTemp
+            
+        }
+        
+        
+        let temperatureDifference = appDelegate.staticTodayTemp - comparisonTemp
+        let temperatureDelta = abs(temperatureDifference)
+        
+        
+        if temperatureDifference < -10 && temperatureDelta >= 10 {
+            
+            print("Blue")
+            tempFeelingLabel.textColor = appDelegate.blueColor
+            currentTemperatureLabel.textColor = appDelegate.blueColor
+            tempFeelingLabel.text = "a lot colder"
+            appDelegate.defaultColor = appDelegate.blueColor
+            
+        } else if temperatureDifference < -3 && temperatureDelta < 10 {
+            
+            print("Light Blue")
+            tempFeelingLabel.textColor = appDelegate.cyanColor
+            currentTemperatureLabel.textColor = appDelegate.cyanColor
+            tempFeelingLabel.text = "a bit cooler"
+            appDelegate.defaultColor = appDelegate.cyanColor
+            
+        } else if temperatureDifference > 3 && temperatureDelta < 10 {
+            
+            print("Orange")
+            tempFeelingLabel.textColor = appDelegate.orangeColor
+            currentTemperatureLabel.textColor = appDelegate.orangeColor
+            tempFeelingLabel.text = "a bit warmer"
+            appDelegate.defaultColor = appDelegate.orangeColor
+            
+        } else if temperatureDifference > 10 && temperatureDelta >= 10 {
+            
+            print("Red")
+            tempFeelingLabel.textColor = appDelegate.redColor
+            currentTemperatureLabel.textColor = appDelegate.redColor
+            tempFeelingLabel.text = "a lot hotter"
+            appDelegate.defaultColor = appDelegate.redColor
+            
+        } else {
+            
+            print("Green")
+            tempFeelingLabel.textColor = appDelegate.greenColor
+            currentTemperatureLabel.textColor = appDelegate.greenColor
+            tempFeelingLabel.text = "no different"
+            appDelegate.defaultColor = appDelegate.greenColor
+            
+        }
+        
+        self.presentUpdatedWeather()
+        
+    }
+
     
     func updateWeatherIcons() {
         
@@ -289,9 +665,16 @@ class PrimaryViewController: UIViewController, CLLocationManagerDelegate{
                 break
             }
         
+        if appDelegate.locationName == "Chernobyl" {
+            
+            weatherIcon.image = #imageLiteral(resourceName: "iconNuclear")
+            
+        } else {}
+        
         presentUpdatedWeather()
         
     }
+
     
     func presentUpdatedWeather() {
         
@@ -299,9 +682,11 @@ class PrimaryViewController: UIViewController, CLLocationManagerDelegate{
             self.selectedLocation.alpha = 1
             self.weatherIcon.alpha = 1
             self.primaryMessageView.alpha = 1
+            self.tempListView.alpha = 1
         }
         
     }
+ 
     
     func setupGradient()
     {
@@ -317,15 +702,18 @@ class PrimaryViewController: UIViewController, CLLocationManagerDelegate{
         self.view.layer.insertSublayer(gradient, at: 0)
     }
 
+    
     override func viewDidLayoutSubviews() {
         updateGradient()
     }
 
+    
     func updateGradient()
     {
         gradient.frame = view.bounds
         gradient.locations = gradientLocations() as [NSNumber]?
     }
+
     
     func gradientLocations() -> [CGFloat]
     {
@@ -350,41 +738,43 @@ class PrimaryViewController: UIViewController, CLLocationManagerDelegate{
         return [0.0, topStopLocation, bottomStartLocation, 1.0]
 
     }
+
     
     func updateTimeofDay(){
         
         if appDelegate.selectedTime == "earlyMorning" {
             
-            itFeelsLabel.text = "Early morning,\n it feels"
+            itFeelsLabel.text = "Early morning,\nit felt"
             
         } else if appDelegate.selectedTime == "morning" {
             
-            itFeelsLabel.text = "This morning,\n it feels"
+            itFeelsLabel.text = "This morning,\nit felt"
             
         } else if appDelegate.selectedTime == "afternoon" {
             
-            itFeelsLabel.text = "This afternoon,\n it feels"
+            itFeelsLabel.text = "This afternoon,\nit will feel"
             
         } else if appDelegate.selectedTime == "evening" {
             
-            itFeelsLabel.text = "This evening,\n it feels"
+            itFeelsLabel.text = "This evening,\nit will feel"
             
         } else if appDelegate.selectedTime == "night" {
             
-            itFeelsLabel.text = "Tonight,\n it feels"
+            itFeelsLabel.text = "Tonight,\nit will feel"
             
         } else if appDelegate.selectedTime == "lateNight" {
             
-            itFeelsLabel.text = "Late tonight,\n it feels"
+            itFeelsLabel.text = "Late tonight,\nit will feel"
             
         } else {
             
-            itFeelsLabel.text = "Right now,\n it feels"
+            itFeelsLabel.text = "Right now,\nit feels"
             
         }
         
         
     }
+ 
     
     func updateReferenceDate(){
         
@@ -397,19 +787,19 @@ class PrimaryViewController: UIViewController, CLLocationManagerDelegate{
         
         if appDelegate.selectedDate == "dayBeforeYesterday" {
             
-            comparisonLabel.text = "than \(dayBeforeYesterdayExtended.string(from: dayBeforeYesterday!))."
+            comparisonLabel.text = "than\n\(dayBeforeYesterdayExtended.string(from: dayBeforeYesterday!))"
             
         } else if appDelegate.selectedDate == "yesterday" {
             
-            comparisonLabel.text = "than yesterday."
+            comparisonLabel.text = "than\nyesterday"
             
         } else if appDelegate.selectedDate == "tomorrow" {
             
-            comparisonLabel.text = "than tomorrow."
+            comparisonLabel.text = "than\ntomorrow"
             
         } else if appDelegate.selectedDate == "dayAfterTomorrow" {
             
-            comparisonLabel.text = "than \(dayAfterTomorrowExtended.string(from: dayAfterTomorrow!))."
+            comparisonLabel.text = "than\n\(dayAfterTomorrowExtended.string(from: dayAfterTomorrow!))"
             
         } else {
             
@@ -426,55 +816,12 @@ class PrimaryViewController: UIViewController, CLLocationManagerDelegate{
         updateTimeofDay()
         
         updateReferenceDate()
+        
+        getWeather()
+        
+        
+//      tempCompareSecondTime()
             
-    }
-    
-    func getYesterdaysWeather(){
-        
-//        let yesterdayAsUNIXString = DateFormatter()
-//        yesterdayAsUNIXString.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
-//        let yesterdayForAPI = yesterdayAsUNIXString.string(from: yesterday!)
-//
-//        print(yesterdayForAPI)
-//        
-//        
-//        let apiKey = "c8ce828d290027eefc03bf39287d8589"
-//        let coordinates = "\(latitude!),\(longitude!)"
-//        
-//        print(coordinates)
-//        print("https://api.darksky.net/forecast/\(apiKey)/\(coordinates)/\(yesterdayForAPI)")
-//        
-//        let url = URL(string:"https://api.darksky.net/forecast/\(apiKey)/\(coordinates)/\(yesterdayForAPI)")
-//        let request = URLRequest(url: url!)
-//        let session = URLSession(
-//            configuration: URLSessionConfiguration.default,
-//            delegate:nil,
-//            delegateQueue:OperationQueue.main
-//        )
-//        
-//        let task : URLSessionDataTask = session.dataTask(with: request,completionHandler: { (dataOrNil, response, error) in
-//            if let data = dataOrNil {
-//                if let responseDictionary = try! JSONSerialization.jsonObject(with: data, options:[]) as? NSDictionary {
-//                    print("response: \(responseDictionary)")
-//                    self.forecasts = responseDictionary.value(forKeyPath: "response.forecasts") as? [NSDictionary]
-//                    
-//                    self.todaysForecast = responseDictionary["currently"] as! NSDictionary
-//                    
-//                    self.todayDaily = responseDictionary["daily"] as! NSDictionary
-//                    
-//                    self.tempCompare()
-//                    
-//                    self.updateTimeofDay()
-//                    
-//                    self.updateReferenceDate()
-//                    
-//                }
-//            }
-//        });
-//        task.resume()
-//        
-//        print(yesterdayForAPI)
-        
     }
     
     
@@ -511,6 +858,13 @@ class PrimaryViewController: UIViewController, CLLocationManagerDelegate{
  
         appDelegate.detailDate = "\(dayAfterTomorrow!)"
         performSegue(withIdentifier: "toDailyDetailView", sender: nil)
+        
+    }
+    
+    @IBAction func onPressRefresh(_ sender: UIButton) {
+
+        itFeelsLabel.text = "Right now,\nit feels"
+        comparisonLabel.text = "than\nyesterday"
         
     }
     

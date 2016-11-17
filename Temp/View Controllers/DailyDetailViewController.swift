@@ -69,7 +69,7 @@ class DailyDetailViewController: UIViewController {
     
     func getWeather() {
         
-        let apiKey = "c8ce828d290027eefc03bf39287d8589"
+        let apiKey = "ed431aaf78bd9b48e6647d64b1271ebd"
         let coordinates = "\(appDelegate.staticLatitude!),\(appDelegate.staticLongitude!)"
         
         let currentDate = "\(appDelegate.detailDate)"
@@ -156,18 +156,31 @@ class DailyDetailViewController: UIViewController {
         
         let sunriseAsDate = DateFormatter()
         sunriseAsDate.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        let sunriseAsDateActual = sunriseAsDate.date(from: sunrise as! String)
+        print(sunrise!)
+//        let sunriseAsDateActual = sunriseAsDate.date(from:"\(sunrise!)")
+        let sunriseAsDateActual = Date(timeIntervalSince1970: sunrise as! Double)
         
         print("The new date is \(sunriseAsDateActual)")
         
         let readableSunrise = DateFormatter()
         readableSunrise.timeStyle = .short
-        sunriseValue.text = readableSunrise.string(from: sunriseAsDateActual!)
+        sunriseValue.text = readableSunrise.string(from: sunriseAsDateActual)
         
+        let sunsetAsDate = DateFormatter()
+        sunsetAsDate.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        print(sunset!)
+        let sunsetAsDateActual = Date(timeIntervalSince1970: sunset as! Double)
+        
+        print("The new date is \(sunsetAsDateActual)")
+        
+        let readableSunset = DateFormatter()
+        readableSunset.timeStyle = .short
+        sunsetValue.text = readableSunset.string(from: sunsetAsDateActual)
+
         apparentMaxTempLabel.text = "\(maxTemperature)°"
         apparentMinTempLabel.text = "\(minTemperature)°"
 //        sunriseValue.text = "\(sunrise)"
-        sunsetValue.text = "\(sunset)"
+//        sunsetValue.text = "\(sunset)"
         chanceOfRainValue.text = "\(chanceOfRain)"
         humidityValue.text = "\(humidity)"
         windValue.text = "\(wind)"

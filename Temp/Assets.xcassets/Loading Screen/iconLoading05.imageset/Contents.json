@@ -2,11 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "iconClose.pdf",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "iconLoading05.png",
       "scale" : "2x"
     },
     {
